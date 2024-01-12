@@ -2,14 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Models\Product;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Foundation\Application;
+use App\Models\{
+    Blog,
+    Product
+};
 
 class HomePageController extends Controller
 {
-        public function index()
-        {
-            $recent_products = Product::latest()->take(3)->get(['name','price', 'image','description']);
-            return view('index' , compact('recent_products'));
-        }
+    public function __invoke(): View|Application|Factory|\Illuminate\Contracts\Foundation\Application
+    {
+        $recentProducts = Product::latest()->take(3)->get(['name', 'price', 'image', 'description']);
+        $recentBlogs = Blog::with('author:id,name')
+            ->latest()
+            ->take(3)
+            ->get(['title', 'image', 'description', 'author_id']);
+
+        return view('index', compact('recentProducts', 'recentBlogs'));
+    }
 }

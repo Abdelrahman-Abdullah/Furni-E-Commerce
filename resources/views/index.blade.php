@@ -1,5 +1,6 @@
 @extends('front.layouts.front-layout')
 @section('content')
+    @dd($recentBlogs)
     <!-- Start Product Section -->
     <div class="product-section">
         <div class="container">
