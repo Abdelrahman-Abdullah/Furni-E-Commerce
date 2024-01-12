@@ -21,7 +21,7 @@ class BlogFactory extends Factory
             'author_id' => $this->faker->randomElement($users_id),
             'title' => $this->faker->sentence(5),
             'slug' => $this->faker->slug(),
-            'image' => $this->faker->imageUrl(640, 480, 'blogs', true),
+            'image' => '/post-'.rand(1, 3).'.jpg', // 'blog-1.png', 'blog-2.png', 'blog-3.png
             'description' => $this->faker->paragraph(5),
         ];
     }

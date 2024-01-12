@@ -24,7 +24,7 @@ class ProductFactory extends Factory
             'price' => $this->faker->randomFloat(2, 1, 1000),
             'description' => $this->faker->text(200),
             'category_id' => $this->faker->randomElement($categories_id),
-            'image' => $this->faker->imageUrl(640, 480, 'furniture', true),
+            'image' => '/product-'.rand(1, 3).'.png',
         ];
     }
 }

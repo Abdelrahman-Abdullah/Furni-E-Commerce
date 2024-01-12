@@ -18,7 +18,7 @@ class HomePageController extends Controller
         $recentBlogs = Blog::with('author:id,name')
             ->latest()
             ->take(3)
-            ->get(['title', 'image', 'description', 'author_id']);
+            ->get(['title', 'image', 'description', 'author_id','created_at']);
 
         return view('index', compact('recentProducts', 'recentBlogs'));
     }
