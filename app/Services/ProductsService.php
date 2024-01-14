@@ -7,8 +7,9 @@ use Illuminate\Database\Eloquent\Collection;
 
 class ProductsService
 {
-    public function all(): Collection
+    public function all()
     {
-        return Product::all();
+        return Product::with('category:id,name')
+            ->select('id', 'name', 'price','description','image','category_id');
     }
 }

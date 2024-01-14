@@ -10,8 +10,12 @@ class ProductController extends Controller
 {
     public function __construct(protected ProductsService $productsService){}
 
-    public function index(): Collection
+    public function __invoke()
     {
-        return $this->productsService->all();
+        $products = $this->productsService->all()
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('Front.products.index', compact('products'));
     }
 }
