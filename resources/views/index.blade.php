@@ -1,4 +1,4 @@
-@extends('front.layouts.front-layout')
+@extends('front.layouts.front-layout', ['title' => "Modern Interior Design Studio"])
 @section('content')
     <!-- Start Product Section -->
     <div class="product-section">

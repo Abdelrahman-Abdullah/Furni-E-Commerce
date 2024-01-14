@@ -1,4 +1,4 @@
-@extends('Front.layouts.front-layout')
+@extends('Front.layouts.front-layout', ['title' => 'Shop'])
 @section('content')
     <div class="untree_co-section product-section before-footer-section">
         <div class="container">
