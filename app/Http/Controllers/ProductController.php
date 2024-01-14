@@ -13,7 +13,7 @@ class ProductController extends Controller
     public function __invoke()
     {
         $products = $this->productsService->all()
-            ->paginate(10)
+            ->paginate(8)
             ->withQueryString();
 
         return view('Front.products.index', compact('products'));
