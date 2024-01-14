@@ -6,6 +6,7 @@
                 @foreach($products as $product)
                     <!-- Start Column 1 -->
                     <div class="col-12 col-md-4 col-lg-3 mb-5">
+{{--                        TODO: Add href to the product page--}}
                         <a class="product-item" href="#">
                             <img src="{{$product->imageUrl}}" class="img-fluid product-thumbnail" alt="">
                             <h3 class="product-title">{{$product->name}}</h3>
