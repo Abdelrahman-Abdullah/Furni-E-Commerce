@@ -19,7 +19,7 @@ class Product extends Model
         'image',
     ];
 
-    protected $appends = ['imageUrl'];
+    protected $appends = ['image_url'];
 
     public function imageUrl(): Attribute
     {
