@@ -34,7 +34,7 @@ class ProductTest extends TestCase
                     'price',
                     'description',
                     'categoryName',
-                    'image_url',
+                    'imageUrl',
                 ],
             ],
         ]);
