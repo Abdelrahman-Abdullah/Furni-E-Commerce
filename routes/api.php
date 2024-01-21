@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\API\ProductController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\{
+    UserRegisterController,
+    UserSessionController,
+    ProductController
+};
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +18,13 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::prefix('users')->name('users.')->group(function () {
+    Route::post('register', UserRegisterController::class)->name('register');
+    Route::post('login', [UserSessionController::class, 'login'])->name('login');
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('logout', [UserSessionController::class, 'logout'])->name('logout');
+    });
+});
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('', [ProductController::class, 'index'])->name('index');
 });
