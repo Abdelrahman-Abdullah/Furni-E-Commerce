@@ -10,4 +10,9 @@ class UserException extends Exception
     {
         return new self('Oops, something went wrong'.$additionMsg, 500);
     }
+
+    public static function InvalidCredentials(): self
+    {
+        return new self('Invalid credentials', 401);
+    }
 }
