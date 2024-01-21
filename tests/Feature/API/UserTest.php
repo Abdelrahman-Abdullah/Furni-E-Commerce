@@ -64,4 +64,38 @@ class UserTest extends TestCase
             ->assertStatus(200);
     }
 
+    public function test_user_cannot_login_with_invalid_credentials(): void
+    {
+        // Arrange
+        $user = \App\Models\User::factory()->create([
+            'password' => 'password',
+        ]);
+        $credentials = [
+            'email' => $user->email,
+            'password' => 'wrong_password',
+        ];
+
+        // Act
+        $response = $this->postJson('/api/users/login', $credentials);
+
+        // Assert
+        $response->assertJson(['message' => 'Invalid credentials'])
+            ->assertStatus(401);
+    }
+    public function test_user_login_validation_works(): void
+    {
+        // Arrange
+        $credentials = [
+            'email' => '',
+            'password' => '',
+        ];
+
+        // Act
+        $response = $this->postJson('/api/users/login', $credentials);
+
+        // Assert
+        $response->assertJsonValidationErrors(['email', 'password'])
+            ->assertStatus(422);
+    }
+
 }
