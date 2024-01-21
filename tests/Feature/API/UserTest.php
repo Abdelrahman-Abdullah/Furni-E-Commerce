@@ -97,5 +97,18 @@ class UserTest extends TestCase
         $response->assertJsonValidationErrors(['email', 'password'])
             ->assertStatus(422);
     }
+public function test_user_can_logout_successfully(): void
+    {
+        // Arrange
+        $user = \App\Models\User::factory()->create();
+        Sanctum::actingAs($user);
+
+        // Act
+        $response = $this->postJson('/api/users/logout');
+
+        // Assert
+        $response->assertJson(['message' => 'User logged out successfully.'])
+            ->assertStatus(200);
+    }
 
 }
