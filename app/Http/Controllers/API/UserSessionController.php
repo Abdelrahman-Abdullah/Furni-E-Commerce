@@ -31,4 +31,10 @@ class UserSessionController extends Controller
             return response()->json(['message' => $e->getMessage(),], $e->getCode());
         }
     }
+
+    public function logout(Request $request)
+    {
+        $request->user()->currentAccessToken()->delete();
+        return response()->json(['message' => 'User logged out successfully.']);
+    }
 }
