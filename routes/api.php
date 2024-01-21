@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\API\ProductController;
-use App\Http\Controllers\API\UserRegisterController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\{
+    UserRegisterController,
+    UserSessionController,
+    ProductController
+};
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 Route::prefix('users')->name('users.')->group(function () {
     Route::post('register', UserRegisterController::class)->name('register');
+    Route::post('login', [UserSessionController::class, 'login'])->name('login');
 });
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('', [ProductController::class, 'index'])->name('index');

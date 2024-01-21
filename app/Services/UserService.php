@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Exceptions\UserException;
 use App\Models\User;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -31,13 +32,13 @@ class UserService
     {
         try {
             if (!Auth::attempt($data)) {
-                throw UserException::InvalidCredentials();
+                throw new AuthenticationException('Invalid credentials');
             }
             return Auth::user();
-        } catch (\Exception $e) {
+        } catch (AuthenticationException $e) {
             // User creation failed
             Log::error("User login failed: {$e->getMessage()}");
-            throw UserException::OopsSomethingWentWrongWhileCreating($e->getMessage());
+            throw UserException::InvalidCredentials();
         }
     }
 }
