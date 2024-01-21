@@ -4,6 +4,7 @@ namespace Tests\Feature\API;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -43,4 +44,24 @@ class UserTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['email', 'phone']);
     }
+    public function test_user_can_login_successfully(): void
+    {
+        // Arrange
+        $user = \App\Models\User::factory()->create([
+            'password' => 'password',
+        ]);
+        $credentials = [
+            'email' => $user->email,
+            'password' => 'password',
+        ];
+
+        // Act
+        $response = $this->postJson('/api/users/login', $credentials);
+
+        // Assert
+        $response->assertJsonStructure(['message', 'user','access_token'])
+            ->assertJson(['message' => 'User logged in successfully.', 'user' => $user->toArray()])
+            ->assertStatus(200);
+    }
+
 }
