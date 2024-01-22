@@ -17,7 +17,8 @@ class UserRegisterController extends Controller
     public function store(UserRegisterRequest $request)
     {
         try {
-            $this->userService->store($request->validated());
+           $this->userService->store($request->validated());
+            return redirect()->route('home')->with('success', 'User created successfully');
         } catch (UserException $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

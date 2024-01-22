@@ -19,7 +19,7 @@ use App\Http\Controllers\{
 Route::prefix('users')->name('users.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/register', [UserRegisterController::class,'create'])->name('register');
-        Route::post('/register', [UserRegisterController::class,'store'])->name('register');
+        Route::post('/register', [UserRegisterController::class,'store'])->name('store');
     });
 });
 Route::get('/', HomePageController::class)->name('home');
