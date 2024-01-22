@@ -17,7 +17,10 @@ use App\Http\Controllers\{
 |
 */
 Route::prefix('users')->name('users.')->group(function () {
-    Route::get('/register', [UserRegisterController::class,'create'])->name('register');
+    Route::middleware('guest')->group(function () {
+        Route::get('/register', [UserRegisterController::class,'create'])->name('register');
+        Route::post('/register', [UserRegisterController::class,'store'])->name('register');
+    });
 });
 Route::get('/', HomePageController::class)->name('home');
 Route::get('/products', ProductController::class)->name('products.index');
