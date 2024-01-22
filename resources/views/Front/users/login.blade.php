@@ -16,12 +16,18 @@
                                 Login
                             </h1>
                         </div>
-                        <form>
+                        <form action="{{route('users.login')}} " method="POST">
+                            @csrf
                             <div class="row mb-2">
                                 <div class="col-8">
                                     <div class="form-group mb-2">
                                         <label class="text-black" for="email">Email address</label>
-                                        <input type="email" class="form-control" id="email">
+                                        <input type="email" class="form-control" id="email" value="{{old('email')}}" name="email">
+                                        @error('email')
+                                            <div class="text-danger">
+                                                {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +35,12 @@
                                 <div class="col-8">
                                     <div class="form-group">
                                         <label class="text-black" for="password">Password</label>
-                                        <input type="password" class="form-control" id="password">
+                                        <input type="password" class="form-control" id="password" name="password">
+                                        @error('password')
+                                            <div class="text-danger">
+                                                {{$message}}
+                                            </div>
+                                        @enderror
                                     </div>
                                 </div>
                             </div>
