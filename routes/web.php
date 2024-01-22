@@ -4,8 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{
     HomePageController,
     ProductController,
-    UserRegisterController
-};
+    UserRegisterController,
+    UserSessionController};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,7 +20,7 @@ Route::prefix('users')->name('users.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/register', [UserRegisterController::class,'create'])->name('register');
         Route::post('/register', [UserRegisterController::class,'store'])->name('store');
-        Route::view('/login', 'Front.users.login')->name('login');
+        Route::get('/login', [UserSessionController::class,'create'])->name('login');
     });
 });
 Route::get('/', HomePageController::class)->name('home');
