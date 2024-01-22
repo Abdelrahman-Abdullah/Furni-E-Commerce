@@ -1,9 +1,11 @@
 <?php
-
-use App\Http\Controllers\HomePageController;
-use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\{
+    HomePageController,
+    ProductController,
+    UserRegisterController
+};
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,6 +16,8 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-
+Route::prefix('users')->name('users.')->group(function () {
+    Route::get('/register', [UserRegisterController::class,'create'])->name('register');
+});
 Route::get('/', HomePageController::class)->name('home');
 Route::get('/products', ProductController::class)->name('products.index');

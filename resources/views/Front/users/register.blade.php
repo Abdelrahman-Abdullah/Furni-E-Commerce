@@ -14,41 +14,33 @@
 
                         <form>
                             <div class="row mb-2">
-                                <div class="col-6">
                                     <div class="form-group">
-                                        <label class="text-black" for="fname">First name</label>
-                                        <input type="text" class="form-control" id="fname">
+                                        <label class="text-black" for="name">First name</label>
+                                        <input type="text" class="form-control" id="name" name="name">
                                     </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-group">
-                                        <label class="text-black" for="lname">Last name</label>
-                                        <input type="text" class="form-control" id="lname">
-                                    </div>
-                                </div>
                             </div>
                             <div class="form-group mb-2">
                                 <label class="text-black" for="email">Email address</label>
-                                <input type="email" class="form-control" id="email">
+                                <input type="email" class="form-control" id="email" name="email">
                             </div>
 
                             <div class="row mb-2">
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label class="text-black" for="fname">Password</label>
-                                        <input type="text" class="form-control" id="fname">
+                                        <label class="text-black" for="password">Password</label>
+                                        <input type="password" class="form-control" id="password" name="password">
                                     </div>
                                 </div>
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label class="text-black" for="lname">Confirm Password</label>
-                                        <input type="text" class="form-control" id="lname">
+                                        <label class="text-black" for="password_confirmation">Confirm Password</label>
+                                        <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
                                     </div>
                                 </div>
                             </div>
 
                             <div class="form-group mb-3">
-                                <a href="www.facbook.com">Have an account ?</a>
+                                <a href="#">Have an account ?</a>
                             </div>
 
                             <button type="submit" class="btn btn-primary-hover-outline">Sign up</button>
