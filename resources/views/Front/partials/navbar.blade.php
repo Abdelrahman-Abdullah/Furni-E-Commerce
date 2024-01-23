@@ -25,7 +25,11 @@
                 @auth
                     <li><a class="nav-link" href="cart.html"><img src="{{asset("front-assets/images")}}/cart.svg"></a>
                     </li>
-                    <li><a class="nav-link" href="#">Logout</a>
+                    <li>
+                        <form action="{{route('users.logout')}}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
                     </li>
                 @else
                     <li><a class="nav-link" href="{{route('users.login')}}"><img
