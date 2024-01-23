@@ -23,6 +23,9 @@ Route::prefix('users')->name('users.')->group(function () {
         Route::get('/login', [UserSessionController::class,'create'])->name('login');
         Route::post('/login', [UserSessionController::class,'store']);
     });
+    Route::middleware('auth')->group(function () {
+        Route::post('/logout', [UserSessionController::class,'destroy'])->name('logout');
+    });
 });
 Route::get('/', HomePageController::class)->name('home');
 Route::get('/products', ProductController::class)->name('products.index');

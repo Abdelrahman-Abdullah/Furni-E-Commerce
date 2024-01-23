@@ -28,5 +28,14 @@ class UserSessionController extends Controller
             ]);
         }
     }
+public function destroy(Request $request): RedirectResponse
+    {
+        auth()->logout();
+
+        $request->session()->invalidate(); // Flush the session data and regenerate the ID
+        $request->session()->regenerateToken(); // Regenerate the CSRF token value...
+
+        return redirect()->route('home');
+    }
 
 }

@@ -2,7 +2,8 @@
     <div class="container">
         <a class="navbar-brand" href="index.html">Furni<span>.</span></a>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni"
+                aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -21,8 +22,19 @@
             </ul>
 
             <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
-                <li><a class="nav-link" href="#"><img src="{{asset("front-assets/images")}}/user.svg"></a></li>
-                <li><a class="nav-link" href="cart.html"><img src="{{asset("front-assets/images")}}/cart.svg"></a></li>
+                @auth
+                    <li><a class="nav-link" href="cart.html"><img src="{{asset("front-assets/images")}}/cart.svg"></a>
+                    </li>
+                    <li>
+                        <form action="{{route('users.logout')}}" method="post">
+                            @csrf
+                            <button type="submit" class="btn btn-danger">Logout</button>
+                        </form>
+                    </li>
+                @else
+                    <li><a class="nav-link" href="{{route('users.login')}}"><img
+                                src="{{asset("front-assets/images")}}/user.svg"></a></li>
+                @endauth
             </ul>
         </div>
     </div>
