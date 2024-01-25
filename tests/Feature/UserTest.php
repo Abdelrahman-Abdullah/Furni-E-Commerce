@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
 
 class UserTest extends TestCase
@@ -69,5 +70,34 @@ class UserTest extends TestCase
         $response
             ->assertStatus(302)
             ->assertRedirect('/');
+    }
+    public function test_user_can_logout()
+    {
+        // Arrange
+        $user = \App\Models\User::factory()->create([
+            'password' => 'password',
+        ]);
+        // Act
+        $this->actingAs($user);
+        $response = $this->post('/users/logout');
+        // Assert
+        $response
+            ->assertStatus(302)
+            ->assertRedirect('/');
+
+    }
+    public function test_user_must_be_logged_in_to_can_logout()
+    {
+        // Arrange
+        $user = \App\Models\User::factory()->create([
+            'password' => 'password',
+        ]);
+        // Act
+        $response = $this->post('/users/logout');
+        // Assert
+        $response
+            ->assertStatus(302)
+            ->assertRedirect('users/login');
+
     }
 }
