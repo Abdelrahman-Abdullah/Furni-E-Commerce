@@ -28,5 +28,31 @@ class ProductTest extends TestCase
         $response->assertOk()
             ->assertSeeInOrder(Product::with('category')->take($perPage)->pluck('name')->toArray());
     }
+    public function test_user_can_get_the_right_single_product(): void
+    {
+        // Arrange
+        $category = Category::factory()->create();
+        $product = Product::factory()->create(['category_id' => $category->id]);
+
+        // Act
+        $response = $this->get('/products/' . $product->name);
+
+        // Assert
+        $response->assertOk()
+           ->assertViewHas('product', $product);
+    }
+    public function test_user_get_not_found_in_wrong_product_name(): void
+    {
+        // Arrange
+        $category = Category::factory()->create();
+        $product = Product::factory()->create(['category_id' => $category->id]);
+
+        // Act
+        $response = $this->get('/products/' . $product->name . 'AnyThing');
+
+        // Assert
+        $response->assertRedirect()
+            ->assertSessionHasErrors('error', 'Product Not Found');
+    }
 
 }
