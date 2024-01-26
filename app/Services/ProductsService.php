@@ -25,7 +25,7 @@ class ProductsService
             ->select('id', 'name', 'price','description','image','category_id')
             ->where('name', $name)
             ->first();
-        throw_if(is_null($product), ProductException::OopsWeHaveNoProductsYetSorry());
+        throw_if(is_null($product), ProductException::OopsNoProductWithThisInformation());
 
         return $product;
     }
