@@ -1,11 +1,11 @@
-@extends('Front.layouts.front_layout' , ['title'=>$product->name ?? 'Product Page'])
+@extends('Front.layouts.front-layout' , ['title'=>$product->name ?? 'Product Page'])
 @section('content')
     <div class="untree_co-section product-section before-footer-section">
         <div class="container">
             <div class="row">
                 <!-- Start Column 1 -->
                 <div class="col-12 col-md-4 col-lg-3 mb-5">
-                    <img src="images/product-3.png" class="img-fluid product-thumbnail">
+                    <img src="{{asset('front-assets/images')}}/product-3.png" class="img-fluid product-thumbnail">
                 </div>
                 <div class="col-12 col-md-4 col-lg-3 mb-5">
                     <h3 class="product-title">Nordic Chair</h3>

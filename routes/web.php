@@ -28,4 +28,7 @@ Route::prefix('users')->name('users.')->group(function () {
     });
 });
 Route::get('/', HomePageController::class)->name('home');
-Route::get('/products', ProductController::class)->name('products.index');
+Route::prefix('products')->name('products.')->group(function () {
+    Route::get('', [ProductController::class,'index'])->name('index');
+    Route::get('/{name}', [ProductController::class,'show'])->name('show');
+});
