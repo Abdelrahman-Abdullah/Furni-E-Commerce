@@ -1,5 +1,8 @@
 @extends('Front.layouts.front-layout' , ['title'=>$product->name ?? 'Product Page'])
 @section('content')
+    @error('error')
+    <div class="alert alert-danger text-center m-5 ">{{$message}}</div>
+    @else
     <div class="untree_co-section product-section before-footer-section">
         <div class="container">
             <div class="row">
@@ -25,4 +28,5 @@
             </div>
         </div>
     </div>
+    @enderror
 @endsection
