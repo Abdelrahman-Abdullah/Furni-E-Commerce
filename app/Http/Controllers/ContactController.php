@@ -6,5 +6,8 @@ use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    //
+    public function create()
+    {
+        return view('Front.contact-us');
+    }
 }
