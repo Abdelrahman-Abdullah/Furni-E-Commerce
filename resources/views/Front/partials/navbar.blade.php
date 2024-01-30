@@ -15,10 +15,14 @@
                 <li class="{{request()->is('products') ? 'active' : '' }}">
                     <a class="nav-link " href="{{route('products.index')}}">Shop</a>
                 </li>
-                <li><a class="nav-link" href="about.html">About us</a></li>
+                <li class="{{request()->is('about') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('about')}}">About us</a>
+                </li>
                 <li><a class="nav-link" href="services.html">Services</a></li>
                 <li><a class="nav-link" href="blog.html">Blog</a></li>
-                <li><a class="nav-link" href="contact.html">Contact us</a></li>
+                <li class="{{request()->is('contact') ? 'active' : '' }}">
+                    <a class="nav-link" href={{route('contact.create')}}>Contact us</a>
+                </li>
             </ul>
 
             <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
