@@ -23,7 +23,11 @@ Route::view('about', 'Front.about-us')->name('about');
 #endregion
 
 #region Contact Routes
-Route::get('contact', [ContactController::class,'create'])->name('about');
+Route::controller(ContactController::class)->name('contact.')->group(function () {
+    Route::get('contact', 'create')->name('create');
+    Route::post('contact', 'store');
+});
+
 #endregion
 
 #region User Routes
