@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{
+    ContactController,
     HomePageController,
     ProductController,
     UserRegisterController,
@@ -18,8 +19,17 @@ use App\Http\Controllers\{
 */
 #region Public Routes
 Route::get('/', HomePageController::class)->name('home');
-Route::view('/about', 'Front.about-us')->name('about');
+Route::view('about', 'Front.about-us')->name('about');
 #endregion
+
+#region Contact Routes
+Route::controller(ContactController::class)->name('contact.')->group(function () {
+    Route::get('contact', 'create')->name('create');
+    Route::post('contact', 'store');
+});
+
+#endregion
+
 #region User Routes
 Route::prefix('users')->name('users.')->group(function () {
     Route::middleware('guest')->group(function () {
