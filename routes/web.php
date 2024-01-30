@@ -16,6 +16,11 @@ use App\Http\Controllers\{
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+#region Public Routes
+Route::get('/', HomePageController::class)->name('home');
+Route::view('/about', 'Front.about-us')->name('about');
+#endregion
+#region User Routes
 Route::prefix('users')->name('users.')->group(function () {
     Route::middleware('guest')->group(function () {
         Route::get('/register', [UserRegisterController::class,'create'])->name('register');
@@ -27,8 +32,10 @@ Route::prefix('users')->name('users.')->group(function () {
         Route::post('/logout', [UserSessionController::class,'destroy'])->name('logout');
     });
 });
-Route::get('/', HomePageController::class)->name('home');
+#endregion
+#region Product Routes
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('', [ProductController::class,'index'])->name('index');
     Route::get('/{name}', [ProductController::class,'show'])->name('show');
 });
+#endregion
