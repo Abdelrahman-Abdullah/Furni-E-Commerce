@@ -15,6 +15,6 @@ class ContactController extends Controller
     public function store(ContactRequest $request)
     {
         Contact::create($request->validated());
-        return redirect()->route('home')->with('success', 'Your message has been sent successfully');
+        return redirect()->back()->with('success', 'Your message has been sent successfully');
     }
 }
