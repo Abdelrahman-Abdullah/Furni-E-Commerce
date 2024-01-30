@@ -6,13 +6,14 @@
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-8 pb-4">
                         @if(session('success'))
-                            <div class="row mb-5">
-                                <div class="col-lg-12 text-center">
+                                <div class="col-lg-12 text-center"
+                                     x-data="{ display: true }" x-show="display"
+                                     x-init="setTimeout(() => { display = false }, 2000);"
+                                >
                                     <div class="alert alert-success" role="alert">
                                         {{session()->get('success')}}
                                     </div>
                                 </div>
-                            </div>
                         @endif
                         <div class="row mb-5">
                             <div class="col-lg-4">

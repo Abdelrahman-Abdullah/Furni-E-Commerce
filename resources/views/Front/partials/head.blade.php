@@ -7,6 +7,9 @@
     <meta name="description" content="" />
     <meta name="keywords" content="bootstrap, bootstrap4" />
 
+    <!-- Alpine JS -->
+    <script src="//unpkg.com/alpinejs" defer></script>
+
     <!-- Bootstrap CSS -->
     <link href="{{asset("front-assets/css")}}/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
