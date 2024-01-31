@@ -18,7 +18,9 @@
                 <li class="{{request()->is('about') ? 'active' : '' }}">
                     <a class="nav-link" href="{{route('about')}}">About us</a>
                 </li>
-                <li><a class="nav-link" href="services.html">Services</a></li>
+                <li class="{{request()->is('services') ? 'active' : '' }}">
+                    <a class="nav-link" href="{{route('services')}}">Services</a>
+                </li>
                 <li><a class="nav-link" href="blog.html">Blog</a></li>
                 <li class="{{request()->is('contact') ? 'active' : '' }}">
                     <a class="nav-link" href={{route('contact.create')}}>Contact us</a>
