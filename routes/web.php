@@ -1,10 +1,10 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\{
-    ContactController,
+use App\Http\Controllers\{ContactController,
     HomePageController,
     ProductController,
+    ServiceController,
     UserRegisterController,
     UserSessionController};
 /*
@@ -20,6 +20,7 @@ use App\Http\Controllers\{
 #region Public Routes
 Route::get('/', HomePageController::class)->name('home');
 Route::view('about', 'Front.about-us')->name('about');
+Route::get('services', ServiceController::class)->name('services');
 #endregion
 
 #region Contact Routes
