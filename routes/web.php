@@ -1,7 +1,8 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-use App\Http\Controllers\{ContactController,
+use App\Http\Controllers\{BlogController,
+    ContactController,
     HomePageController,
     ProductController,
     ServiceController,
@@ -21,6 +22,11 @@ use App\Http\Controllers\{ContactController,
 Route::get('/', HomePageController::class)->name('home');
 Route::view('about', 'Front.about-us')->name('about');
 Route::get('services', ServiceController::class)->name('services');
+
+Route::prefix('blogs')->name('blogs.')->group(function () {
+    Route::get('', [BlogController::class,'index'])->name('index');
+    Route::get('/{slug}', [BlogController::class,'show'])->name('show');
+});
 #endregion
 
 #region Contact Routes
