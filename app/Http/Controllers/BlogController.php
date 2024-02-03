@@ -12,7 +12,7 @@ class BlogController extends Controller
     {
         $cachedData = Cache::remember('blog', now()->addHour(), function () {
             return Blog::with('author:id,name')
-                ->select('title', 'slug', 'image', 'description','author_id')
+                ->select('title', 'slug', 'image', 'description','author_id','created_at')
                 ->latest()
                 ->get();
         });
