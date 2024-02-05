@@ -18,4 +18,12 @@ class BlogController extends Controller
         });
         return view('Front.blogs.index' , ['blogs' => $cachedData]);
     }
+    public function show($slug)
+    {
+        $singleBlog = Blog::with('author:id,name')
+            ->select('title', 'image', 'description','author_id','created_at')
+            ->where('slug', $slug)
+            ->firstOrFail();
+        return view('Front.blogs.show', ['blog' => $singleBlog]);
+    }
 }
