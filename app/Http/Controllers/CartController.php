@@ -14,13 +14,20 @@ class CartController extends Controller
 
     public function store(Request $request)
     {
+        $productId = $request->id;
+
+        // If the product is already in the cart, increment the quantity
         $cart = session('cart') ?? [];
         if (isset($cart[$request->id])) {
             $cart[$request->id]['quantity']++;
             session(['cart' => $cart]);
             return true;
         }
-        $product = Product::select('id', 'name', 'price', 'image')->find($request->id);
+        // Find the product; if not found, return an error response
+        $product = Product::select('id', 'name', 'price', 'image')->find($productId);
+        if (!$product) {
+            return  'Product not found';
+        }
         $cart[$request->id] = [
             'title' => $product->name,
             'price' => $product->price,
@@ -28,6 +35,7 @@ class CartController extends Controller
             'quantity' => 1
         ];
         session(['cart' => $cart]);
-        return "Added Successfully";
+        return "Product Added Successfully";
     }
+
 }

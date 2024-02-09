@@ -4,6 +4,14 @@
 
     <div class="untree_co-section product-section before-footer-section">
         <div class="container">
+            <div x-data="showSuccessMessage"  style="z-index: 1050; background: #0f5132; opacity: 0.9"
+                 class="position-fixed bottom-50 start-50 translate-middle-x text-white text-center  col-6 rounded-3
+                 d-flex justify-content-center align-content-center
+                 ">
+                <p x-show="display" class="m-0 px-2 p-2  ">
+                    Product added successfully!
+                </p>
+            </div>
             <div class="row">
                 @forelse($products as $product)
                     <!-- Start Column 1 -->
@@ -13,7 +21,6 @@
                             <img src="{{$product->imageUrl}}" class="img-fluid product-thumbnail" alt="">
                             <h3 class="product-title">{{$product->name}}</h3>
                             <strong class="product-price">${{$product->price}}</strong>
-
                         </a>
                         <span class=" bg-black rounded-circle p-2 addToCart"  data-id="{{$product->id}}">
                                 <img src="{{asset('front-assets/images')}}/cross.svg" class="img-fluid" alt="{{$product->name}}">

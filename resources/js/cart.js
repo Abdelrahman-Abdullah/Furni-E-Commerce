@@ -1,20 +1,35 @@
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+import Alpine from 'alpinejs'
+document.addEventListener('alpine:init', () => {
+    Alpine.data('showSuccessMessage', () => ({
+        display: false,
+        init() {
+            this.addToCart();
+        },
+        addToCart() {
+            const self = this;
+            $('.addToCart').on('click', function () {
+                var id = $(this).data('id');
+            $.ajax({
+                url: '/cart/add/' + id,
+                method: 'POST',
+                data: {
+                    id: id
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // CSRF token for Laravel
+                },
+                success: function(data) {
+                    self.display = true; // Show success message using Alpine.js
+                    setTimeout(() => self.display = false, 3000); // Hide after 3 seconds
+                },
+                error: function(xhr, status, error) {
+                    console.error(error); // Handle error
+                }
+            })
+            });
         }
-    });
-    $(".addToCart").on('click' , (function(){
-        var product = $(this).data('id');
-        var url = '/cart/add/'+product;
-        $.ajax({
-            url: url,
-            type: 'POST',
-            data: {
-                id: product
-            },
-            success: function (data) {
-                // TODO:: Show Success Message
-               console.log(data);
-            }
-        });
+
     }));
+});
+Alpine.start()
+
