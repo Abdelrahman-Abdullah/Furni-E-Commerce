@@ -1,6 +1,6 @@
 @extends('Front.layouts.front-layout' , ['title' => 'Cart'])
 @section('content')
-    @forelse($cartProducts as $product)
+    @vite('resources/js/cart')
     <div class="untree_co-section before-footer-section">
         <div class="container">
             <div class="row mb-5">
@@ -18,53 +18,35 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
+                            @forelse($cartProducts as $product)
+                                 <tr>
                                 <td class="product-thumbnail">
-                                    <img src="images/product-1.png" alt="Image" class="img-fluid">
+                                    <img src="{{$product['imageUrl']}}" alt="Image" class="img-fluid">
                                 </td>
                                 <td class="product-name">
-                                    <h2 class="h5 text-black">Product 1</h2>
+                                    <h2 class="h5 text-black">{{$product['title']}}</h2>
                                 </td>
-                                <td>$49.00</td>
+                                <td>${{$product['price']}}</td>
                                 <td>
                                     <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
                                         <div class="input-group-prepend">
                                             <button class="btn btn-outline-black decrease" type="button">&minus;</button>
                                         </div>
-                                        <input type="text" class="form-control text-center quantity-amount" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                                        <input type="text" class="form-control text-center quantity-amount" value="{{$product['quantity'] ?? 1}}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                                         <div class="input-group-append">
                                             <button class="btn btn-outline-black increase" type="button">&plus;</button>
                                         </div>
                                     </div>
 
                                 </td>
-                                <td>$49.00</td>
+                                <td>${{$product['price'] * $product['quantity']}}</td>
                                 <td><a href="#" class="btn btn-black btn-sm">X</a></td>
                             </tr>
-
-                            <tr>
-                                <td class="product-thumbnail">
-                                    <img src="images/product-2.png" alt="Image" class="img-fluid">
-                                </td>
-                                <td class="product-name">
-                                    <h2 class="h5 text-black">Product 2</h2>
-                                </td>
-                                <td>$49.00</td>
-                                <td>
-                                    <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
-                                        <div class="input-group-prepend">
-                                            <button class="btn btn-outline-black decrease" type="button">&minus;</button>
-                                        </div>
-                                        <input type="text" class="form-control text-center quantity-amount" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-black increase" type="button">&plus;</button>
-                                        </div>
-                                    </div>
-
-                                </td>
-                                <td>$49.00</td>
-                                <td><a href="#" class="btn btn-black btn-sm">X</a></td>
-                            </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="6" class="text-center">No Products Found</td>
+                                </tr>
+                            @endforelse
                             </tbody>
                         </table>
                     </div>
@@ -130,11 +112,4 @@
             </div>
         </div>
     </div>
-    @empty
-        <div class="untree_co-section before-footer-section">
-        <div class="col-md-12 ">
-                <h2 class="text-center">No Products in Cart Hurry  Up and Add!!</h2>
-            </div>
-        </div>
-    @endforelse
 @endsection

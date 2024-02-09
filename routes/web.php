@@ -63,5 +63,6 @@ Route::prefix('cart')->middleware('auth')
     ->controller(CartController::class)->group(function () {
 
         Route::get('', 'index')->name('index');
+        Route::post('add/{id}', 'store')->name('store');
 });
 #endregion
