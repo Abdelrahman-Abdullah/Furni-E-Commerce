@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{BlogController,
+    CartController,
     ContactController,
     HomePageController,
     ProductController,
@@ -54,5 +55,13 @@ Route::prefix('users')->name('users.')->group(function () {
 Route::prefix('products')->name('products.')->group(function () {
     Route::get('', [ProductController::class,'index'])->name('index');
     Route::get('/{name}', [ProductController::class,'show'])->name('show');
+});
+#endregion
+#region Cart Routes
+Route::prefix('cart')->middleware('auth')
+    ->name('cart.')
+    ->controller(CartController::class)->group(function () {
+
+        Route::get('', 'index')->name('index');
 });
 #endregion
