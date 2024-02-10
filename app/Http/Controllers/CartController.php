@@ -29,6 +29,7 @@ class CartController extends Controller
             return  'Product not found';
         }
         $cart[$request->id] = [
+            'id' => $product->id,
             'title' => $product->name,
             'price' => $product->price,
             'imageUrl' => $product->image_url,
@@ -36,6 +37,13 @@ class CartController extends Controller
         ];
         session(['cart' => $cart]);
         return "Product Added Successfully";
+    }
+    public function destroy(Request $request)
+    {
+        $cart = session('cart') ?? [];
+        unset($cart[$request->id]);
+        session(['cart' => $cart]);
+        return "deleted successfully";
     }
 
 }

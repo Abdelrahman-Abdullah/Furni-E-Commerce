@@ -22,9 +22,12 @@
                             <h3 class="product-title">{{$product->name}}</h3>
                             <strong class="product-price">${{$product->price}}</strong>
                         </a>
-                        <span class=" bg-black rounded-circle p-2 addToCart"  data-id="{{$product->id}}">
-                                <img src="{{asset('front-assets/images')}}/cross.svg" class="img-fluid" alt="{{$product->name}}">
-                        </span>
+                         @auth
+                            <span class=" bg-black rounded-circle p-2 addToCart" data-id="{{$product->id}}">
+                                <img src="{{asset('front-assets/images')}}/cross.svg" class="img-fluid"
+                                     alt="{{$product->name}}">
+                            </span>
+                        @endauth
                     </div>
                 @empty
                     <div class="col-12">

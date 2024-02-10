@@ -6,17 +6,19 @@
             <div class="row mb-5">
                 <form class="col-md-12" method="post">
                     <div class="site-blocks-table">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail">Image</th>
-                                <th class="product-name">Product</th>
-                                <th class="product-price">Price</th>
-                                <th class="product-quantity">Quantity</th>
-                                <th class="product-total">Total</th>
-                                <th class="product-remove">Remove</th>
-                            </tr>
-                            </thead>
+                        <table class="table" id="cartTable">
+                            @if($cartProducts)
+                                <thead>
+                                <tr>
+                                    <th class="product-thumbnail">Image</th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-total">Total</th>
+                                    <th class="product-remove">Remove</th>
+                                </tr>
+                                </thead>
+                            @endif
                             <tbody>
                             @forelse($cartProducts as $product)
                                  <tr>
@@ -40,7 +42,7 @@
 
                                 </td>
                                 <td>${{$product['price'] * $product['quantity']}}</td>
-                                <td><a href="#" class="btn btn-black btn-sm">X</a></td>
+                                <td><a  class="btn btn-black btn-sm remove" data-id="{{$product['id']}}">X</a></td>
                             </tr>
                             @empty
                                 <tr>

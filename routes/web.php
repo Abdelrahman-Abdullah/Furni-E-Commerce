@@ -64,5 +64,6 @@ Route::prefix('cart')->middleware('auth')
 
         Route::get('', 'index')->name('index');
         Route::post('add/{id}', 'store')->name('store');
+        Route::delete('remove/{id}', 'destroy')->name('delete');
 });
 #endregion

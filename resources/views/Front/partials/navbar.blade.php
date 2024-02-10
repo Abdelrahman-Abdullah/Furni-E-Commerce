@@ -31,7 +31,7 @@
 
             <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
                 @auth
-                    <li><a class="nav-link" href="cart.html"><img src="{{asset("front-assets/images")}}/cart.svg"></a>
+                    <li><a class="nav-link" href="{{route('cart.index')}}"><img src="{{asset("front-assets/images")}}/cart.svg"></a>
                     </li>
                     <li>
                         <form action="{{route('users.logout')}}" method="post">
