@@ -23,7 +23,7 @@
 	};
 	tinyslider();
 
-	
+
 
 
 	var sitePlusMinus = function() {
@@ -48,7 +48,6 @@
 	    function increaseValue(event, quantityAmount) {
 	        value = parseInt(quantityAmount.value, 10);
 
-	        console.log(quantityAmount, quantityAmount.value);
 
 	        value = isNaN(value) ? 0 : value;
 	        value++;
@@ -63,9 +62,9 @@
 
 	        quantityAmount.value = value;
 	    }
-	    
+
 	    init();
-		
+
 	};
 	sitePlusMinus();
 
