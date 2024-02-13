@@ -1,3 +1,4 @@
+{{--@dd($cartProducts)--}}
 @extends('Front.layouts.front-layout' , ['title' => 'Cart'])
 @section('content')
     @vite('resources/js/cart')

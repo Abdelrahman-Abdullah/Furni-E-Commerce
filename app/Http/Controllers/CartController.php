@@ -45,11 +45,23 @@ class CartController extends Controller
         // If the product is already in the cart, increment the quantity
         $cart = session('cart') ?? [];
         if (isset($cart[$request->id])) {
-            $request->increment ? $cart[$request->id]['quantity']++ : $cart[$request->id]['quantity']--;
+            return $this->updateCart($productId, $request->increment);
+        }
+        return false;
+    }
+
+    private function updateCart($productId, $isIncrement)
+    {
+        $cart = session('cart') ?? [];
+        if ($isIncrement == 'true' && $cart[$productId]['quantity'] >= 1) {
+            $cart[$productId]['quantity']++;
+            session(['cart' => $cart]);
+            return true;
+        } else if ($isIncrement == 'false' && $cart[$productId]['quantity'] > 1) {
+            $cart[$productId]['quantity']--;
             session(['cart' => $cart]);
             return true;
         }
-        return 'Product not found';
     }
 
 }
