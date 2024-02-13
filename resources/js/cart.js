@@ -42,10 +42,11 @@ $('.increase').on('click', function () {
     var $input = $thisButton.closest('.input-group').find('.quantity-amount');
     var currentQuantity = parseInt($input.val(), 10);
     $.ajax({
-        url: '/cart/add/' + id,
+        url: '/cart/update/' + id,
         method: 'POST',
         data: {
-            id: id
+            id: id,
+            increment: true
         },
         success: function(data) {
             var $productRow = $thisButton.closest('tr'); // Assuming your structure is within a <tr>
