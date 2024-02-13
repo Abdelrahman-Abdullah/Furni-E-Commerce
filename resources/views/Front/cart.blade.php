@@ -26,7 +26,7 @@
                                 <td class="product-name">
                                     <h2 class="h5 text-black">{{$product['title']}}</h2>
                                 </td>
-                                <td>${{$product['price']}}</td>
+                                <td class="product-price">${{$product['price']}}</td>
                                 <td>
                                     <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
                                         <div class="input-group-prepend">
@@ -39,7 +39,7 @@
                                     </div>
 
                                 </td>
-                                <td>${{$product['price'] * $product['quantity']}}</td>
+                                <td >${{$product['price'] * $product['quantity']}}</td>
                                 <td><a href="#" class="btn btn-black btn-sm">X</a></td>
                             </tr>
                             @empty
