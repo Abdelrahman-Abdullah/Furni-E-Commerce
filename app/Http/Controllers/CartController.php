@@ -29,6 +29,7 @@ class CartController extends Controller
             return  'Product not found';
         }
         $cart[$request->id] = [
+            'id' => $product->id,
             'title' => $product->name,
             'price' => $product->price,
             'imageUrl' => $product->image_url,
@@ -36,6 +37,31 @@ class CartController extends Controller
         ];
         session(['cart' => $cart]);
         return "Product Added Successfully";
+    }
+
+    public function update(Request $request)
+    {
+        $productId = $request->id;
+        // If the product is already in the cart, increment the quantity
+        $cart = session('cart') ?? [];
+        if (isset($cart[$request->id])) {
+            return $this->updateCart($productId, $request->increment);
+        }
+        return false;
+    }
+
+    private function updateCart($productId, $isIncrement)
+    {
+        $cart = session('cart') ?? [];
+        if ($isIncrement == 'true' && $cart[$productId]['quantity'] >= 1) {
+            $cart[$productId]['quantity']++;
+            session(['cart' => $cart]);
+            return true;
+        } else if ($isIncrement == 'false' && $cart[$productId]['quantity'] > 1) {
+            $cart[$productId]['quantity']--;
+            session(['cart' => $cart]);
+            return true;
+        }
     }
 
 }
