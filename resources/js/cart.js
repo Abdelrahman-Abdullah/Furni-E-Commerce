@@ -13,7 +13,7 @@ document.addEventListener('alpine:init', () => {
         addToCart() {
             const self = this;
             $('.addToCart').on('click', function () {
-                var id = $(this).data('id');
+                let id = $(this).data('id');
             $.ajax({
                 url: '/cart/add/' + id,
                 method: 'POST',
@@ -36,8 +36,8 @@ document.addEventListener('alpine:init', () => {
 });
 Alpine.start();
 function updateCartQuantity(isIncrease, id, $thisButton) {
-    var $input = $thisButton.closest('.input-group').find('.quantity-amount');
-    var currentQuantity = parseInt($input.val(), 10);
+    let $input = $thisButton.closest('.input-group').find('.quantity-amount');
+    let currentQuantity = parseInt($input.val(), 10);
     $.ajax({
         url: '/cart/update/' + id,
         method: 'POST',
@@ -46,14 +46,14 @@ function updateCartQuantity(isIncrease, id, $thisButton) {
             increment: isIncrease
         },
         success: function(data) {
-            var $productRow = $thisButton.closest('tr'); // Assuming your structure is within a <tr>
-            var pricePerItem = parseFloat($productRow.find('.product-price').text().replace('$', ''));
+            let $productRow = $thisButton.closest('tr'); // Assuming your structure is within a <tr>
+            let pricePerItem = parseFloat($productRow.find('.product-price').text().replace('$', ''));
             // Recalculate totalPrice if not provided by server
-            var totalPrice = (pricePerItem * currentQuantity).toFixed(2);
+            let totalPrice = (pricePerItem * currentQuantity).toFixed(2);
 
             // Update the quantity input field and the total price cell
             $input.val(currentQuantity);
-            var $totalPriceCell = $thisButton.closest('td').next('td');
+            let $totalPriceCell = $thisButton.closest('td').next('td');
             $totalPriceCell.text('$' + totalPrice);
             },
         error: function(xhr, status, error) {
@@ -64,8 +64,8 @@ function updateCartQuantity(isIncrease, id, $thisButton) {
 }
 
 $('.increase, .decrease').on('click', function () {
-    var id = $(this).data('id');
-    var isIncrease = $(this).hasClass('increase');
+    let id = $(this).data('id');
+    let isIncrease = $(this).hasClass('increase');
     updateCartQuantity(isIncrease, id, $(this));
 });
 
