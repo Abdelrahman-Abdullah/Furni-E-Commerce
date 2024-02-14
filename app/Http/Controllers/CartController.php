@@ -50,6 +50,17 @@ class CartController extends Controller
         return false;
     }
 
+    public function destroy(Request $request)
+    {
+        $cart = session('cart') ?? [];
+        if (isset($cart[$request->id])) {
+            unset($cart[$request->id]);
+            session(['cart' => $cart]);
+            return true;
+        }
+        return false;
+    }
+
     private function updateCart($productId, $isIncrement)
     {
         $cart = session('cart') ?? [];
@@ -63,5 +74,7 @@ class CartController extends Controller
             return true;
         }
     }
+
+
 
 }
