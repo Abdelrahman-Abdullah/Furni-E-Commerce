@@ -73,6 +73,7 @@ class CartController extends Controller
             session(['cart' => $cart]);
             return true;
         }
+        return false;
     }
 
 

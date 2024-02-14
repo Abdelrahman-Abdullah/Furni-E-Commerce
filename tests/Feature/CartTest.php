@@ -75,7 +75,7 @@ class CartTest extends TestCase
     {
         // Arrange: Set up the environment and prerequisites
         $user = User::factory()->create();
-        $product = Product::factory()->for(Category::factory(), 'category')->create();
+        $product = Product::factory()->for(Category::factory(), 'category')->create(); // Another way to create a product with a category
         $this->actingAs($user);
 
         // Add a product to the cart and increment its quantity
@@ -100,5 +100,26 @@ class CartTest extends TestCase
                 'quantity' => 1 // Assuming the initial quantity was 2
             ]
         ]);
+    }
+    public function test_user_can_remove_product_from_cart(): void
+    {
+        // Arrange: Set up the environment and prerequisites
+        $user = User::factory()->create();
+        $product = Product::factory()->for(Category::factory(), 'category')->create();
+        $this->actingAs($user);
+
+        // Add a product to the cart
+        $this->post("/cart/add/".$product->id);
+
+        // Act: Perform the action to be tested
+        // Remove the product from the cart
+        $response = $this->delete("/cart/remove/".$product->id);
+
+        // Assert: Verify the outcome
+        // Check if the HTTP response is OK
+        $response->assertStatus(200);
+
+        // Check if the session cart data matches expected values
+        $response->assertSessionHas('cart', []);
     }
 }
