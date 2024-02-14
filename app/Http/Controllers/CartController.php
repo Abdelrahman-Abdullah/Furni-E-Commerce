@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class CartController extends Controller
 {
@@ -52,13 +53,22 @@ class CartController extends Controller
 
     public function destroy(Request $request)
     {
-        $cart = session('cart') ?? [];
+        $cart = session('cart', []);
         if (isset($cart[$request->id])) {
             unset($cart[$request->id]);
             session(['cart' => $cart]);
-            return true;
+            // Return a success response with a message
+            return response()->json([
+                'success' => true,
+                'message' => 'Item removed successfully.',
+            ], Response::HTTP_OK); // HTTP 200
         }
-        return false;
+
+        // Return an error response if the item is not found
+        return response()->json([
+            'success' => false,
+            'message' => 'Item not found in the cart.',
+        ], Response::HTTP_NOT_FOUND); // HTTP 404
     }
 
     private function updateCart($productId, $isIncrement)

@@ -122,4 +122,21 @@ class CartTest extends TestCase
         // Check if the session cart data matches expected values
         $response->assertSessionHas('cart', []);
     }
+    public function test_user_cannot_remove_nonexistent_product_from_cart(): void
+    {
+        // Arrange: Set up the environment and prerequisites
+        $user = User::factory()->create();
+        $product = Product::factory()->for(Category::factory(), 'category')->create();
+        $this->actingAs($user);
+
+        // Act: Perform the action to be tested
+        // Remove a product that is not in the cart
+        $response = $this->delete("/cart/remove/".$product->id);
+
+        // Assert: Verify the outcome
+        // Check if the HTTP response is OK
+        $response->assertStatus(404);
+        $response->assertJson(['message'=> 'Item not found in the cart.']);
+
+    }
 }
