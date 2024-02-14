@@ -15,6 +15,18 @@ class CartTest extends TestCase
     /**
      * A basic feature test example.
      */
+
+    public function test_user_can_view_cart(): void
+    {
+        // Arrange
+        $user = User::factory()->create();
+        $this->actingAs($user);
+        // Act
+        $response = $this->get('/cart');
+        // Assert
+        $response->assertStatus(200);
+        $response->assertViewIs('Front.cart');
+    }
     public function test_user_can_add_product_to_cart(): void
     {
       // Arrange
