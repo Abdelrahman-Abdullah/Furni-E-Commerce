@@ -22,6 +22,7 @@ document.addEventListener('alpine:init', () => {
                 },
 
                 success: function(data) {
+                    $('#successMessage').css('display', 'block'); // Show success message using jQuery
                     self.display = true; // Show success message using Alpine.js
                     setTimeout(() => self.display = false, 3000); // Hide after 3 seconds
                 },

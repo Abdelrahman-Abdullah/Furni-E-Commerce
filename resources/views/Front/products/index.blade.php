@@ -4,10 +4,8 @@
 
     <div class="untree_co-section product-section before-footer-section">
         <div class="container">
-            <div x-data="showSuccessMessage"  style="z-index: 1050; background: #0f5132; opacity: 0.9"
-                 class="position-fixed bottom-50 start-50 translate-middle-x text-white text-center  col-6 rounded-3
-                 d-flex justify-content-center align-content-center
-                 ">
+            <div x-data="showSuccessMessage" id="successMessage"  style="z-index: 1050; background: #0f5132; opacity: 0.9; display: none"
+                 class="position-fixed bottom-50 start-50 translate-middle-x text-white text-center  col-6 rounded-3">
                 <p x-show="display" class="m-0 px-2 p-2  ">
                     Product added successfully!
                 </p>
