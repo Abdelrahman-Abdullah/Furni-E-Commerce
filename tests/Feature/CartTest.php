@@ -38,4 +38,14 @@ class CartTest extends TestCase
         ]);
 
     }
+    public function test_only_logged_in_user_can_add_product_to_cart(): void
+    {
+        // Arrange
+        $category = Category::factory()->create();
+        $product = Product::factory()->create(['category_id' => $category->id]);
+        // Act
+        $response = $this->post('/cart/add/'. $product->id);
+        // Assert
+        $response->assertRedirect('/users/login');
+    }
 }
