@@ -7,7 +7,8 @@
             <div class="row mb-5">
                 <form class="col-md-12" method="post">
                     <div class="site-blocks-table">
-                        <table class="table">
+                        <table class="table" id="productTable">
+                            @if(!(empty($cartProducts)))
                             <thead>
                             <tr>
                                 <th class="product-thumbnail">Image</th>
@@ -18,6 +19,8 @@
                                 <th class="product-remove">Remove</th>
                             </tr>
                             </thead>
+                            @endif
+
                             <tbody>
                             @forelse($cartProducts as $product)
                                  <tr>
@@ -41,7 +44,7 @@
 
                                 </td>
                                 <td >${{$product['price'] * $product['quantity']}}</td>
-                                <td><a href="#" class="btn btn-black btn-sm">X</a></td>
+                                <td><a class="btn btn-black btn-sm remove"  data-id="{{$product['id']}}" >X</a></td>
                             </tr>
                             @empty
                                 <tr>
