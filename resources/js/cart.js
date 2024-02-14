@@ -22,6 +22,7 @@ document.addEventListener('alpine:init', () => {
                 },
 
                 success: function(data) {
+                    $('#successMessage').css('display', 'block'); // Show success message using jQuery
                     self.display = true; // Show success message using Alpine.js
                     setTimeout(() => self.display = false, 3000); // Hide after 3 seconds
                 },
@@ -68,6 +69,32 @@ $('.increase, .decrease').on('click', function () {
     let isIncrease = $(this).hasClass('increase');
     updateCartQuantity(isIncrease, id, $(this));
 });
+
+    $('.remove').on('click', function () {
+        let id = $(this).data('id');
+        let button = $(this);
+        $.ajax({
+            url: '/cart/remove/' + id,
+            method: 'DELETE',
+            data: {
+                id: id
+            },
+            success: function(data) {
+                button.closest('tr').remove();
+                if ($('#productTable tbody tr').length === 0) {
+                    // Remove the table header if this was the last product
+                    $('#productTable thead').remove();
+
+                    // Add a new row with a message indicating the cart is empty
+                    $('#productTable').append('<tr><td colspan="12">Your cart is now empty</td></tr>'); // Replace 'yourColumnSpan' with the number of columns in your table
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('Error removing item from cart');
+            }
+        });
+    });
 
 
 
