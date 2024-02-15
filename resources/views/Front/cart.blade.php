@@ -102,7 +102,7 @@
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">${{$cartProducts['totalPrice']}}</strong>
+                                    <strong class="text-black" id="totalPrice">${{$cartProducts['totalPrice']}}</strong>
                                 </div>
                             </div>
 

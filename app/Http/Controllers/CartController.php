@@ -94,7 +94,7 @@ class CartController extends Controller
         }
         $cart['totalPrice'] = $this->calculateTotalPrice($cart);
         session(['cart' => $cart]);
-        return true;
+        return  $cart['totalPrice'];
     }
 
     private function calculateTotalPrice($cartProducts): float|int
