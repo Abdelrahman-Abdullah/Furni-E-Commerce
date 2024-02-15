@@ -1,4 +1,3 @@
-{{--@dd($cartProducts)--}}
 @extends('Front.layouts.front-layout' , ['title' => 'Cart'])
 @section('content')
     @vite('resources/js/cart')
@@ -23,6 +22,7 @@
 
                             <tbody>
                             @forelse($cartProducts as $product)
+                                @if(!is_array($product)) @continue @endif
                                  <tr>
                                 <td class="product-thumbnail">
                                     <img src="{{$product['imageUrl']}}" alt="Image" class="img-fluid">
@@ -102,7 +102,7 @@
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">${{$totalPrice}}</strong>
+                                    <strong class="text-black">${{$cartProducts['totalPrice']}}</strong>
                                 </div>
                             </div>
 
