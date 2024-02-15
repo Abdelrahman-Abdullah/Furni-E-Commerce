@@ -69,3 +69,5 @@ Route::prefix('cart')->middleware('auth')
         Route::delete('remove/{id}', 'destroy')->name('destroy');
 });
 #endregion
+
+Route::get('/pay',[PaymentController::class,'pay']);

@@ -16,18 +16,18 @@ class PaymentController extends Controller
             'delivery_needed' => 'false',
             'amount_cents' => 100 * 5000,
             'currency' => 'EGP',
-            'merchant_order_id' => '123456',
             'items' => [], // Adding Items Later
         ]);
 
         $payment_key = PaymobService::paymentKey([
             'auth_token' => $token,
             'amount_cents' => 100 * 5000,
+            'expiration' => 3600,
             'currency' => 'EGP',
             'order_id' => $order_id,
             'billing_data' => [
                 'apartment' => '803',
-                'email' => '',
+                'email' => 'test@exampl.com',
                 'floor' => '42',
                 'first_name' => 'John',
                 'street' => 'Ethan Hunt',
@@ -40,10 +40,11 @@ class PaymentController extends Controller
                 'last_name' => 'Doe',
                 'state' => 'NA',
                 ],
+            'integration_id' => env('PAYMOB_INTEGRATION_ID'),
         ]);
 
-        return view('Front.payment', [
-            'payment_key' => $payment_key,
+        return view('Front.payment-frame', [
+            'payment_token' => $payment_key,
             'integration_id' => env('PAYMOB_INTEGRATION_ID'),
 
         ]);
