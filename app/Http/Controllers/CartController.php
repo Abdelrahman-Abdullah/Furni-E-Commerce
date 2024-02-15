@@ -10,7 +10,12 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('Front.cart', ['cartProducts' => session('cart') ?? []]);
+        // Calculate the total price of the cart
+        $cartProducts = session('cart') ?? [];
+        return view('Front.cart', [
+            'cartProducts' => $cartProducts,
+            'totalPrice' => $this->calculateTotalPrice($cartProducts)
+        ]);
     }
 
     public function store(Request $request)
@@ -84,6 +89,15 @@ class CartController extends Controller
             return true;
         }
         return false;
+    }
+
+    private function calculateTotalPrice($cartProducts): float|int
+    {
+        $totalPrice = 0;
+        foreach ($cartProducts as $product) {
+            $totalPrice += $product['price'] * $product['quantity'];
+        }
+        return $totalPrice;
     }
 
 

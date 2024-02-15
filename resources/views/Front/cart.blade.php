@@ -57,6 +57,7 @@
                 </form>
             </div>
 
+{{--            @if(!empty($cartProducts))--}}
             <div class="row">
                 <div class="col-md-6">
                     <div class="row mb-5">
@@ -101,7 +102,7 @@
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong class="text-black">${{$totalPrice}}</strong>
                                 </div>
                             </div>
 
@@ -114,6 +115,8 @@
                     </div>
                 </div>
             </div>
+{{--            @endif--}}
+
         </div>
     </div>
 @endsection
