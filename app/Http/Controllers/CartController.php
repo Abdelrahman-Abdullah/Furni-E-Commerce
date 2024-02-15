@@ -87,14 +87,14 @@ class CartController extends Controller
         $cart = session('cart') ?? [];
         if ($isIncrement == 'true' && $cart[$productId]['quantity'] >= 1) {
             $cart[$productId]['quantity']++;
-            session(['cart' => $cart]);
-            return true;
         } else if ($isIncrement == 'false' && $cart[$productId]['quantity'] > 1) {
             $cart[$productId]['quantity']--;
-            session(['cart' => $cart]);
-            return true;
+        } else {
+            return false;
         }
-        return false;
+        $cart['totalPrice'] = $this->calculateTotalPrice($cart);
+        session(['cart' => $cart]);
+        return true;
     }
 
     private function calculateTotalPrice($cartProducts): float|int
