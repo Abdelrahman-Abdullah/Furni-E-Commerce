@@ -57,7 +57,7 @@
                 </form>
             </div>
 
-{{--            @if(!empty($cartProducts))--}}
+            @if(!empty($cartProducts))
             <div class="row">
                 <div class="col-md-6">
                     <div class="row mb-5">
@@ -115,7 +115,7 @@
                     </div>
                 </div>
             </div>
-{{--            @endif--}}
+            @endif
 
         </div>
     </div>

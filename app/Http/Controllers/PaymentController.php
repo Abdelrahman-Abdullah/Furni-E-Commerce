@@ -8,6 +8,7 @@ use App\Services\PaymobService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Redirect;
 
 class PaymentController extends Controller
 {
@@ -54,11 +55,7 @@ class PaymentController extends Controller
                     'transaction_status' => PaymentStatusEnum::PENDING,
                 ]
             );
-            return view('Front.payment-frame', [
-                'payment_token' => $payment_key,
-                'integration_id' => env('PAYMOB_INTEGRATION_ID'),
-
-            ]);
+           return Redirect::away('https://accept.paymob.com/api/acceptance/iframes/781592?payment_token='.$payment_key);
     }
     public function checkout(Request $request): void
     {
@@ -70,6 +67,7 @@ class PaymentController extends Controller
                 'transaction_status' => PaymentStatusEnum::SUCCESS,
                 'transaction_id' =>$transaction_id
             ]);
+            session()->forget('cart');
         }
         $order->update([
             'transaction_status' => PaymentStatusEnum::FAILED,
@@ -78,6 +76,6 @@ class PaymentController extends Controller
     }
     public function success()
     {
-        return view('Front.cart')->with('success', 'Payment Successful');
+        return view('Front.cart' , ['cartProducts' => []])->with('success', 'Payment Successful');
     }
 }
