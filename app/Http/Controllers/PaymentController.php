@@ -14,19 +14,19 @@ class PaymentController extends Controller
 {
     public function pay(Request $request)
     {
-
+            $cartInformation = PaymobService::getCartInformation();
             $token = PaymobService::getAuthenticationToken();
             $order_id = PaymobService::orderRegistration([
                 'auth_token' => $token,
                 'delivery_needed' => 'false',
-                'amount_cents' => 100 * (int)$request->amount,
                 'currency' => 'EGP',
-                'items' => [], // Adding Items Later
+                'items' => $cartInformation['items'], // Adding Items Later
+                'amount_cents' => $cartInformation['totalPrice']  ,
             ]);
 
             $payment_key = PaymobService::paymentKey([
                 'auth_token' => $token,
-                'amount_cents' => 100 * (int)$request->amount,
+                'amount_cents' => $cartInformation['totalPrice'],
                 'expiration' => 3600,
                 'currency' => 'EGP',
                 'order_id' => $order_id,
@@ -51,14 +51,15 @@ class PaymentController extends Controller
                 [
                     'user_id' => auth()->id(),
                     'order_id' => $order_id,
-                    'total_amount' => $request->amount,
+                    'total_amount' => $cartInformation['totalPrice'] / 100,
                     'transaction_status' => PaymentStatusEnum::PENDING,
                 ]
             );
            return Redirect::away('https://accept.paymob.com/api/acceptance/iframes/781592?payment_token='.$payment_key);
     }
-    public function checkout(Request $request): void
+    public function checkout(Request $request):void
     {
+
         $order_id = $request->obj['order']['id'];
         $transaction_id = $request->obj['id'];
         $order = Order::where('order_id', $order_id)->first();
@@ -67,7 +68,7 @@ class PaymentController extends Controller
                 'transaction_status' => PaymentStatusEnum::SUCCESS,
                 'transaction_id' =>$transaction_id
             ]);
-            session()->forget('cart');
+            return;
         }
         $order->update([
             'transaction_status' => PaymentStatusEnum::FAILED,
@@ -76,6 +77,6 @@ class PaymentController extends Controller
     }
     public function success()
     {
-        return view('Front.cart' , ['cartProducts' => []])->with('success', 'Payment Successful');
+        return redirect()->route('cart.index')->with('success', 'Payment was successful');
     }
 }

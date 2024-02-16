@@ -24,7 +24,7 @@ class PaymobService
         return $response->json()['token'];
     }
 
-    public static function getCartItems(): array
+    public static function getCartInformation(): array
     {
         $cart = session('cart') ?? [];
         if (empty($cart)) {
@@ -32,6 +32,9 @@ class PaymobService
         }
         $items = [];
         foreach ($cart as $product) {
+            if (!is_array($product)) {
+                continue;
+            }
             $items[] = [
                 'name' => $product['title'],
                 'amount_cents' => 100 * $product['price'],
@@ -39,6 +42,9 @@ class PaymobService
                 'quantity' => $product['quantity'],
             ];
         }
-        return $items;
+        return [
+            'items' => $items,
+            'totalPrice' => (int) $cart['totalPrice'] * 100 ?? 0,
+        ];
     }
 }

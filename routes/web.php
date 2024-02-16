@@ -72,6 +72,6 @@ Route::prefix('cart')->middleware('auth')
 });
 #endregion
 
+Route::post('/checkout',[PaymentController::class,'pay'])->name('checkout');
 Route::post('/pay/callback',[PaymentController::class,'checkout']);
-Route::get('/checkout/{amount}',[PaymentController::class,'pay']);
 Route::get('/pay/success',[PaymentController::class,'success']);

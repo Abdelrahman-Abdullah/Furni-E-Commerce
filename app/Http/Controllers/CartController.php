@@ -10,7 +10,6 @@ class CartController extends Controller
 {
     public function index()
     {
-        // Calculate the total price of the cart
         $cartProducts = session('cart') ?? [];
         return view('Front.cart', [
             'cartProducts' => $cartProducts,
