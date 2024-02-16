@@ -1,4 +1,6 @@
 <?php
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{BlogController,
@@ -70,4 +72,6 @@ Route::prefix('cart')->middleware('auth')
 });
 #endregion
 
-Route::get('/pay',[PaymentController::class,'pay']);
+Route::post('/pay/callback',[PaymentController::class,'checkout']);
+Route::get('/checkout/{amount}',[PaymentController::class,'pay']);
+Route::get('/pay/success',[PaymentController::class,'success']);
