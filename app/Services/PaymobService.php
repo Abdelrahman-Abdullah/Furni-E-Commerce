@@ -23,4 +23,22 @@ class PaymobService
         $response = Http::post('https://accept.paymob.com/api/acceptance/payment_keys',$body);
         return $response->json()['token'];
     }
+
+    public static function getCartItems(): array
+    {
+        $cart = session('cart') ?? [];
+        if (empty($cart)) {
+            return [];
+        }
+        $items = [];
+        foreach ($cart as $product) {
+            $items[] = [
+                'name' => $product['title'],
+                'amount_cents' => 100 * $product['price'],
+                'description' => $product['title'],
+                'quantity' => $product['quantity'],
+            ];
+        }
+        return $items;
+    }
 }
