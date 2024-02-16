@@ -62,7 +62,6 @@ class PaymentController extends Controller
     }
     public function checkout(Request $request): void
     {
-        Log::error('callback',['obj'=>$request->obj]);
         $order_id = $request->obj['order']['id'];
         $transaction_id = $request->obj['id'];
         $order = Order::where('order_id', $order_id)->first();
@@ -77,8 +76,8 @@ class PaymentController extends Controller
             'transaction_id' => $transaction_id
         ]);
     }
-    public function success(Request $request)
+    public function success()
     {
-        return $request->all();
+        return view('Front.cart')->with('success', 'Payment Successful');
     }
 }
