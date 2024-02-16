@@ -1,3 +1,4 @@
+
 {{--@dd($cartProducts)--}}
 @extends('Front.layouts.front-layout' , ['title' => 'Cart'])
 @section('content')
@@ -23,6 +24,7 @@
 
                             <tbody>
                             @forelse($cartProducts as $product)
+                                @if(!is_array($product)) @continue @endif
                                  <tr>
                                 <td class="product-thumbnail">
                                     <img src="{{$product['imageUrl']}}" alt="Image" class="img-fluid">
@@ -57,6 +59,7 @@
                 </form>
             </div>
 
+            @if(!empty($cartProducts))
             <div class="row">
                 <div class="col-md-6">
                     <div class="row mb-5">
@@ -101,19 +104,24 @@
                                     <span class="text-black">Total</span>
                                 </div>
                                 <div class="col-md-6 text-right">
-                                    <strong class="text-black">$230.00</strong>
+                                    <strong class="text-black" id="totalPrice">${{$cartProducts['totalPrice']}}</strong>
                                 </div>
                             </div>
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                                    <form action="{{route('checkout')}}" method="post">
+                                        @csrf
+                                         <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            @endif
+
         </div>
     </div>
 @endsection

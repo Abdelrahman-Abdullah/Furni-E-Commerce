@@ -1,10 +1,13 @@
 <?php
+
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\{BlogController,
     CartController,
     ContactController,
     HomePageController,
+    PaymentController,
     ProductController,
     ServiceController,
     UserRegisterController,
@@ -68,3 +71,7 @@ Route::prefix('cart')->middleware('auth')
         Route::delete('remove/{id}', 'destroy')->name('destroy');
 });
 #endregion
+
+Route::post('/checkout',[PaymentController::class,'pay'])->name('checkout');
+Route::post('/pay/callback',[PaymentController::class,'checkout']);
+Route::get('/pay/success',[PaymentController::class,'success']);

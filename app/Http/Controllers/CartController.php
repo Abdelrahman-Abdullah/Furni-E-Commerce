@@ -10,34 +10,44 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('Front.cart', ['cartProducts' => session('cart') ?? []]);
+        $cartProducts = session('cart') ?? [];
+        return view('Front.cart', [
+            'cartProducts' => $cartProducts,
+        ]);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $productId = $request->id;
+        $cart = session('cart', []);
 
-        // If the product is already in the cart, increment the quantity
-        $cart = session('cart') ?? [];
-        if (isset($cart[$request->id])) {
-            $cart[$request->id]['quantity']++;
+        // Check if the product is already in the cart
+        if (isset($cart[$productId])) {
+            // Increment the quantity
+            $cart[$productId]['quantity']++;
+        } else {
+            // Attempt to find the product by its ID
+            $product = Product::select('id', 'name', 'price', 'image')->find($productId);
+            if (!$product) {
+                return 'Product not found';
+            }
+
+            // Add the new product to the cart
+            $cart[$productId] = [
+                'id' => $product->id,
+                'title' => $product->name,
+                'price' => $product->price,
+                'imageUrl' => $product->image_url, // Ensure attribute matches your model
+                'quantity' => 1,
+            ];
+        }
+            // Calculate the total price of the cart
+            $cart['totalPrice'] = $this->calculateTotalPrice($cart);
+            // Update or set the cart with new changes
             session(['cart' => $cart]);
-            return true;
-        }
-        // Find the product; if not found, return an error response
-        $product = Product::select('id', 'name', 'price', 'image')->find($productId);
-        if (!$product) {
-            return  'Product not found';
-        }
-        $cart[$request->id] = [
-            'id' => $product->id,
-            'title' => $product->name,
-            'price' => $product->price,
-            'imageUrl' => $product->image_url,
-            'quantity' => 1
-        ];
-        session(['cart' => $cart]);
-        return "Product Added Successfully";
+            return response()->json([
+                'success' => true,
+                'message' => 'Item added to the cart successfully.',
+            ], Response::HTTP_OK); // HTTP 200
     }
 
     public function update(Request $request)
@@ -76,14 +86,25 @@ class CartController extends Controller
         $cart = session('cart') ?? [];
         if ($isIncrement == 'true' && $cart[$productId]['quantity'] >= 1) {
             $cart[$productId]['quantity']++;
-            session(['cart' => $cart]);
-            return true;
         } else if ($isIncrement == 'false' && $cart[$productId]['quantity'] > 1) {
             $cart[$productId]['quantity']--;
-            session(['cart' => $cart]);
-            return true;
+        } else {
+            return false;
         }
-        return false;
+        $cart['totalPrice'] = $this->calculateTotalPrice($cart);
+        session(['cart' => $cart]);
+        return  $cart['totalPrice'];
+    }
+
+    private function calculateTotalPrice($cartProducts): float|int
+    {
+
+        return array_reduce($cartProducts, function ($carry, $product) {
+            if (is_array($product)) {
+                $carry += $product['price'] * $product['quantity'];
+            }
+            return $carry;
+        }, 0);
     }
 
 

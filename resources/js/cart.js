@@ -56,6 +56,7 @@ function updateCartQuantity(isIncrease, id, $thisButton) {
             $input.val(currentQuantity);
             let $totalPriceCell = $thisButton.closest('td').next('td');
             $totalPriceCell.text('$' + totalPrice);
+            $('#totalPrice').text('$' + data);
             },
         error: function(xhr, status, error) {
             console.error(error);
