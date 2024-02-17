@@ -60,7 +60,7 @@
                             </div>
 
                             <div class="form-group mb-3">
-                                <a href="#">Have an account ?</a>
+                                <a href="{{route('users.login')}}">Have an account ?</a>
                             </div>
 
                             <button type="submit" class="btn btn-primary-hover-outline">Sign up</button>
