@@ -110,7 +110,7 @@
 
                             <div class="row">
                                 <div class="col-md-12">
-                                    <form action="{{route('checkout')}}" method="post">
+                                    <form action="{{route('payment.checkout')}}" method="post">
                                         @csrf
                                          <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
                                     </form>

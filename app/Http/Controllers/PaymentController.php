@@ -57,7 +57,7 @@ class PaymentController extends Controller
             );
            return Redirect::away('https://accept.paymob.com/api/acceptance/iframes/781592?payment_token='.$payment_key);
     }
-    public function checkout(Request $request):void
+    public function callback(Request $request):void
     {
 
         $order_id = $request->obj['order']['id'];
