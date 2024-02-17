@@ -18,7 +18,7 @@ class UserRegisterController extends Controller
     {
         try {
            $this->userService->store($request->validated());
-            return redirect()->route('home')->with('success', 'User created successfully');
+            return redirect()->route('users.login')->with('success', 'User created successfully');
         } catch (UserException $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }

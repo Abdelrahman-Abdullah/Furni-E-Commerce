@@ -11,7 +11,9 @@ use App\Http\Controllers\{BlogController,
     ProductController,
     ServiceController,
     UserRegisterController,
-    UserSessionController};
+    UserSessionController
+};
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,8 +30,8 @@ Route::view('about', 'Front.about-us')->name('about');
 Route::get('services', ServiceController::class)->name('services');
 
 Route::prefix('blogs')->name('blogs.')->group(function () {
-    Route::get('', [BlogController::class,'index'])->name('index');
-    Route::get('/{slug}', [BlogController::class,'show'])->name('show');
+    Route::get('', [BlogController::class, 'index'])->name('index');
+    Route::get('/{slug}', [BlogController::class, 'show'])->name('show');
 });
 #endregion
 
@@ -44,34 +46,38 @@ Route::controller(ContactController::class)->name('contact.')->group(function ()
 #region User Routes
 Route::prefix('users')->name('users.')->group(function () {
     Route::middleware('guest')->group(function () {
-        Route::get('/register', [UserRegisterController::class,'create'])->name('register');
-        Route::post('/register', [UserRegisterController::class,'store'])->name('store');
-        Route::get('/login', [UserSessionController::class,'create'])->name('login');
-        Route::post('/login', [UserSessionController::class,'store']);
+        Route::get('/register', [UserRegisterController::class, 'create'])->name('register');
+        Route::post('/register', [UserRegisterController::class, 'store'])->name('store');
+        Route::get('/login', [UserSessionController::class, 'create'])->name('login');
+        Route::post('/login', [UserSessionController::class, 'store']);
     });
     Route::middleware('auth')->group(function () {
-        Route::post('/logout', [UserSessionController::class,'destroy'])->name('logout');
+        Route::post('/logout', [UserSessionController::class, 'destroy'])->name('logout');
     });
 });
 #endregion
 #region Product Routes
 Route::prefix('products')->name('products.')->group(function () {
-    Route::get('', [ProductController::class,'index'])->name('index');
-    Route::get('/{name}', [ProductController::class,'show'])->name('show');
+    Route::get('', [ProductController::class, 'index'])->name('index');
+    Route::get('/{name}', [ProductController::class, 'show'])->name('show');
 });
 #endregion
 #region Cart Routes
-Route::prefix('cart')->middleware('auth')
-    ->name('cart.')
-    ->controller(CartController::class)->group(function () {
+Route::prefix('cart')->middleware('auth')->name('cart.')->controller(CartController::class)->group(function () {
 
-        Route::get('', 'index')->name('index');
-        Route::post('add/{id}', 'store')->name('store');
-        Route::post('update/{id}', 'update')->name('update');
-        Route::delete('remove/{id}', 'destroy')->name('destroy');
+    Route::get('', 'index')->name('index');
+    Route::post('add/{id}', 'store')->name('store');
+    Route::post('update/{id}', 'update')->name('update');
+    Route::delete('remove/{id}', 'destroy')->name('destroy');
 });
 #endregion
 
-Route::post('/checkout',[PaymentController::class,'pay'])->name('checkout');
-Route::post('/pay/callback',[PaymentController::class,'checkout']);
-Route::get('/pay/success',[PaymentController::class,'success']);
+#region Payment Routes
+Route::controller(PaymentController::class)
+    ->prefix('payment')->name('payment.')->group(function () {
+
+        Route::post('checkout', 'pay')->middleware('auth')->name('checkout');
+        Route::post('callback', 'callback')->name('callback');
+        Route::get('success', 'success')->name('success');
+    });
+#endregion
