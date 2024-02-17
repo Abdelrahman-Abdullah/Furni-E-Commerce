@@ -1,11 +1,17 @@
-
-{{--@dd($cartProducts)--}}
 @extends('Front.layouts.front-layout' , ['title' => 'Cart'])
 @section('content')
     @vite('resources/js/cart')
     <div class="untree_co-section before-footer-section">
         <div class="container">
+                <div class="col-md-8 col-lg-12 pb-4">
+                    @if(session('success'))
+                        <div class="alert alert-success text-center">
+                            {{session('success')}}
+                        </div>
+                    @endif
+                </div>
             <div class="row mb-5">
+
                 <form class="col-md-12" method="post">
                     <div class="site-blocks-table">
                         <table class="table" id="productTable">
