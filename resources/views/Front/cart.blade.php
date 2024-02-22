@@ -67,7 +67,7 @@
             </div>
 
             @if(!empty($cartProducts))
-            <div class="row">
+            <div class="row" id="cartPrices">
                 <div class="col-md-6">
                     <div class="row mb-5">
                         <div class="col-md-6">
