@@ -6,13 +6,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{BlogController,
     CartController,
     ContactController,
+    CouponController,
     HomePageController,
     PaymentController,
     ProductController,
     ServiceController,
     UserRegisterController,
-    UserSessionController
-};
+    UserSessionController};
 
 /*
 |--------------------------------------------------------------------------
@@ -70,6 +70,12 @@ Route::prefix('cart')->middleware('auth')->name('cart.')->controller(CartControl
     Route::post('update/{id}', 'update')->name('update');
     Route::delete('remove/{id}', 'destroy')->name('destroy');
 });
+#endregion
+
+#region Coupon Routes
+Route::post('discount', [CouponController::class, 'checkCoupon'])
+    ->middleware('auth')
+    ->name('coupon.check');
 #endregion
 
 #region Payment Routes
