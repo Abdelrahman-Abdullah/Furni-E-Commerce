@@ -66,6 +66,7 @@ class CartController extends Controller
         $cart = session('cart', []);
         if (isset($cart[$request->id])) {
             unset($cart[$request->id]);
+            if (count($cart) == 1) $cart = [];
             session(['cart' => $cart]);
             // Return a success response with a message
             return response()->json([

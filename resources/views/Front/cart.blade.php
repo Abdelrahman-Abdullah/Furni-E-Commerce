@@ -1,3 +1,4 @@
+{{--@dd($cartProducts)--}}
 @extends('Front.layouts.front-layout' , ['title' => 'Cart'])
 @section('content')
     @vite('resources/js/cart')
@@ -16,16 +17,16 @@
                     <div class="site-blocks-table">
                         <table class="table" id="productTable">
                             @if(!(empty($cartProducts)))
-                            <thead>
-                            <tr>
-                                <th class="product-thumbnail">Image</th>
-                                <th class="product-name">Product</th>
-                                <th class="product-price">Price</th>
-                                <th class="product-quantity">Quantity</th>
-                                <th class="product-total">Total</th>
-                                <th class="product-remove">Remove</th>
-                            </tr>
-                            </thead>
+                                <thead>
+                                <tr>
+                                    <th class="product-thumbnail">Image</th>
+                                    <th class="product-name">Product</th>
+                                    <th class="product-price">Price</th>
+                                    <th class="product-quantity">Quantity</th>
+                                    <th class="product-total">Total</th>
+                                    <th class="product-remove">Remove</th>
+                                </tr>
+                                </thead>
                             @endif
 
                             <tbody>
