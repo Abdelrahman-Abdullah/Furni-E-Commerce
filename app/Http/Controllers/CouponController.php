@@ -13,12 +13,12 @@ class CouponController extends Controller
         try {
             $coupon = Coupon::select('value','validity')->where('code', $request->validated())->first();
             if (!$coupon || $coupon->validity === 'inactive'){
-                return back()->with('error', 'Invalid Coupon or Expired');
+                return back()->withErrors(['code' => 'Invalid Coupon or Expired']);
             }
             $this->applyCoupon($coupon);
             return back()->with('success', 'Coupon Applied Successfully');
         }catch (\Exception $e){
-            return back()->with('error', 'Something went wrong');
+            return back()->with(['code'=>'Something went wrong']);
         }
 
     }
