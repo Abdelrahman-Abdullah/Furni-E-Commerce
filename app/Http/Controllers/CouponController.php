@@ -8,21 +8,25 @@ use Illuminate\Http\Request;
 
 class CouponController extends Controller
 {
-    public function checkCoupon(CouponRequest $request)
+    public function checkCoupon(CouponRequest $request): \Illuminate\Http\RedirectResponse
     {
         try {
-            $coupon = Coupon::firstWhere('code', $request->code);
+            $coupon = Coupon::select('value','validity')->where('code', $request->validated())->first();
             if (!$coupon || $coupon->validity === 'inactive'){
                 return back()->with('error', 'Invalid Coupon or Expired');
             }
-            $cart = session('cart' , []);
-            $cart['totalPrice'] *=  ($coupon->value / 100);
-            session(['cart' => $cart]);
-            $coupon->update(['validity' => 'inactive']);
+            $this->applyCoupon($coupon);
             return back()->with('success', 'Coupon Applied Successfully');
         }catch (\Exception $e){
             return back()->with('error', 'Something went wrong');
         }
 
+    }
+    private function applyCoupon($coupon): void
+    {
+        $cart = session('cart' , []);
+        $cart['totalPrice'] *=  ($coupon->value / 100);
+        session(['cart' => $cart]);
+        $coupon->update(['validity' => 'inactive']);
     }
 }
