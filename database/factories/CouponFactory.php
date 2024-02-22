@@ -17,7 +17,9 @@ class CouponFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'code' => $this->faker->word,
+            'value' => $this->faker->randomNumber(2),
+            'validity' => $this->faker->randomElement(['active', 'inactive']),
         ];
     }
 }
