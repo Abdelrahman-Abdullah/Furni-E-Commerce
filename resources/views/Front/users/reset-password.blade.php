@@ -6,23 +6,23 @@
 
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-8 pb-4">
-                        @if(session('success'))
-                            <div class="alert alert-success text-center">
-                                {{session('success')}}
+                        @error('error')
+                            <div class="alert alert-danger text-center">
+                                {{$message}}
                             </div>
-                        @endif
+                        @enderror
                         <div class="row mb-2">
                             <h1>
                                 Reset Password
                             </h1>
                         </div>
-                        <form action="{{route('users.reset-password')}} " method="POST">
+                        <form action="{{route('users.update-password')}} " method="POST">
                             @csrf
                             <div class="row mb-2">
                                 <div class="col-8">
                                     <div class="form-group mb-2">
                                         <label class="text-black" for="code">Enter Code You Received</label>
-                                        <input type="text" class="form-control" id="code">
+                                        <input type="text" class="form-control" id="code" name="code">
                                         @error('code')
                                         <div class="text-danger">
                                             {{$message}}
@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="form-group mb-2">
                                         <label class="text-black" for="password">New Password</label>
-                                        <input type="text" class="form-control" id="password">
+                                        <input type="password" class="form-control" id="password" name="password">
                                         @error('password')
                                         <div class="text-danger">
                                             {{$message}}
@@ -40,7 +40,7 @@
                                     </div>
                                     <div class="form-group mb-2">
                                         <label class="text-black" for="confirm-password">Confirm Password</label>
-                                        <input type="text" class="form-control" id="confirm-password">
+                                        <input type="password" class="form-control" id="confirm-password" name="password_confirmation">
                                         @error('password_confirmation')
                                         <div class="text-danger">
                                             {{$message}}

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ForgetPasswordRequest;
+use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
 use App\Notifications\SendEmailOTPCodeCoNotification;
 use Illuminate\Http\Request;
@@ -22,9 +23,23 @@ class ResetPassword extends Controller
         $code = Str::random(6);
         // save in session
         $request->session()->put('otp', $code);
+        $request->session()->put('email', $request->email);
         // Send Email To User
         Notification::send($user, new SendEmailOTPCodeCoNotification($user , $code));
-        return redirect()->back()->with('success', 'We have sent you an email with the OTP code');
+        return redirect()->route('users.reset-password')->with('success', 'We have sent you an email with the OTP code');
+    }
+    public function resetPassword()
+    {
+        return view('Front.users.reset-password');
+    }
+    public function updatePassword(ResetPasswordRequest $request)
+    {
+        if ($request->session()->get('otp') == $request->code) {
+                User::where('email', $request->session()->get('email'))
+                    ->update(['password' => bcrypt($request->password)]);
+            return redirect()->route('users.login')->with('success', 'Password has been reset successfully');
+        }
+        return redirect()->back()->with('error', 'Invalid OTP Code');
     }
 
 }
