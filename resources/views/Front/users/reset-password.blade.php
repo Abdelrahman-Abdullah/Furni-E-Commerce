@@ -6,11 +6,11 @@
 
                 <div class="row justify-content-center">
                     <div class="col-md-8 col-lg-8 pb-4">
-                        @error('error')
-                            <div class="alert alert-danger text-center">
-                                {{$message}}
+                        @if(session('success'))
+                            <div class="alert alert-success text-center">
+                                {{session('success')}}
                             </div>
-                        @enderror
+                        @endif
                         <div class="row mb-2">
                             <h1>
                                 Reset Password

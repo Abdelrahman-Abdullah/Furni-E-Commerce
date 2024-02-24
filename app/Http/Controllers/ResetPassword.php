@@ -37,9 +37,10 @@ class ResetPassword extends Controller
         if ($request->session()->get('otp') == $request->code) {
                 User::where('email', $request->session()->get('email'))
                     ->update(['password' => bcrypt($request->password)]);
+                $request->session()->forget(['otp', 'email']);
             return redirect()->route('users.login')->with('success', 'Password has been reset successfully');
         }
-        return redirect()->back()->with('error', 'Invalid OTP Code');
+        return redirect()->back()->withErrors(['code' => 'Invalid OTP Code']);
     }
 
 }
