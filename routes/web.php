@@ -10,6 +10,7 @@ use App\Http\Controllers\{BlogController,
     HomePageController,
     PaymentController,
     ProductController,
+    ResetPassword,
     ServiceController,
     UserRegisterController,
     UserSessionController};
@@ -50,6 +51,10 @@ Route::prefix('users')->name('users.')->group(function () {
         Route::post('/register', [UserRegisterController::class, 'store'])->name('store');
         Route::get('/login', [UserSessionController::class, 'create'])->name('login');
         Route::post('/login', [UserSessionController::class, 'store']);
+        Route::get('/forget-password', [ResetPassword::class, 'index'])->name('forget-password');
+        Route::post('/get-otp-code', [ResetPassword::class, 'getOtp'])->name('get-otp');
+        Route::get('/reset-password', [ResetPassword::class, 'resetPassword'])->name('reset-password');
+        Route::post('/update-password', [ResetPassword::class, 'updatePassword'])->name('update-password');
     });
     Route::middleware('auth')->group(function () {
         Route::post('/logout', [UserSessionController::class, 'destroy'])->name('logout');

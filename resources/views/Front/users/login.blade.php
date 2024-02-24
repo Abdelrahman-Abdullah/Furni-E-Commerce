@@ -45,7 +45,7 @@
                                 </div>
                             </div>
                             <div class="form-group ">
-                                <a href="#">Forget Password ?</a>
+                                <a href="{{route('users.forget-password')}}">Forget Password ?</a>
                             </div>
                             <div class="form-group mb-3">
                                 <a href="{{route('users.register')}}">Don't Have an account ?</a>
