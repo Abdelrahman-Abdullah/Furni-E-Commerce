@@ -52,6 +52,7 @@ Route::prefix('users')->name('users.')->group(function () {
         Route::get('/login', [UserSessionController::class, 'create'])->name('login');
         Route::post('/login', [UserSessionController::class, 'store']);
         Route::get('/forget-password', [ResetPassword::class, 'index'])->name('forget-password');
+        Route::post('/get-otp-code', [ResetPassword::class, 'getOtp'])->name('get-otp');
     });
     Route::middleware('auth')->group(function () {
         Route::post('/logout', [UserSessionController::class, 'destroy'])->name('logout');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Http\Request;
 
 class ResetPassword extends Controller
@@ -10,7 +11,9 @@ class ResetPassword extends Controller
     {
         return view('Front.users.forget-password');
     }
-
-
+    public function getOtp(ResetPasswordRequest $request)
+    {
+        dd("welome Gere");
+    }
 
 }

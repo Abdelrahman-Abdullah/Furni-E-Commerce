@@ -16,7 +16,7 @@
                                 Forget Password
                             </h1>
                         </div>
-                        <form action="{{route('users.forget-password')}} " method="POST">
+                        <form action="{{route('users.get-otp')}} " method="POST">
                             @csrf
                             <div class="row mb-2">
                                 <div class="col-8">
