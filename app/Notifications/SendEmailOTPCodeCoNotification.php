@@ -12,13 +12,16 @@ class SendEmailOTPCodeCoNotification extends Notification implements ShouldQueue
 {
     use Queueable;
     protected $user;
+    protected string $code;
     /**
      * Create a new notification instance.
      */
-    public function __construct(User $user)
+    public function __construct(User $user , string $code)
     {
         $this->user = $user;
+        $this->code = $code;
     }
+
 
     /**
      * Get the notification's delivery channels.
@@ -36,8 +39,9 @@ class SendEmailOTPCodeCoNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
+                    ->subject('Furni - Reset Password')
                     ->line('Welcome '.$this->user->name .' to our website')
-                    ->line('Your OTP Code is: ' . session('otp'))
+                    ->line('Your OTP Code is: ' . $this->code )
                     ->line('Thank you for using our application!');
     }
 

@@ -22,10 +22,9 @@ class ResetPassword extends Controller
         $code = Str::random(6);
         // save in session
         $request->session()->put('otp', $code);
-        Notification::send($user, new SendEmailOTPCodeCoNotification($user));
         // Send Email To User
-        // Check if the code is right
-        // return view
+        Notification::send($user, new SendEmailOTPCodeCoNotification($user , $code));
+        return redirect()->back()->with('success', 'We have sent you an email with the OTP code');
     }
 
 }
