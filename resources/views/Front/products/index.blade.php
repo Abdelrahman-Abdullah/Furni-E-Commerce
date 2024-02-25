@@ -1,7 +1,6 @@
 @extends('Front.layouts.front-layout', ['title' => 'Shop'])
 @section('content')
-    @vite('resources/js/cart')
-
+    @vite('resources/js/cart.js')
     <div class="untree_co-section product-section before-footer-section">
         <div class="container">
             <div x-data="showSuccessMessage" id="successMessage"  style="z-index: 1050; background: #0f5132; opacity: 0.9; display: none"

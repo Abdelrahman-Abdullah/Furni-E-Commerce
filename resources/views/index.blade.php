@@ -1,7 +1,5 @@
 @extends('front.layouts.front-layout', ['title' => "Modern Interior Design Studio"])
 @section('content')
-    @vite('resources/js/cart')
-
     <!-- Start Product Section -->
     <div class="product-section">
         <div class="container">

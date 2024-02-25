@@ -1,7 +1,7 @@
 {{--@dd($cartProducts)--}}
 @extends('Front.layouts.front-layout' , ['title' => 'Cart'])
 @section('content')
-    @vite('resources/js/cart')
+    @vite('resources/js/cart.js')
     <div class="untree_co-section before-footer-section">
         <div class="container">
             <div class="col-md-8 col-lg-12 pb-4">
