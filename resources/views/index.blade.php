@@ -1,5 +1,7 @@
 @extends('front.layouts.front-layout', ['title' => "Modern Interior Design Studio"])
 @section('content')
+    @vite('resources/js/cart')
+
     <!-- Start Product Section -->
     <div class="product-section">
         <div class="container">
@@ -13,17 +15,17 @@
                     </div>
                     <!-- End Column 1 -->
                 @foreach($recentProducts as $product)
-                    <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                        {{--    TODO:: Add Link To Cart--}}
-                        <a class="product-item" href="cart.html">
-                            <img src="{{$product->imageUrl}}" class="img-fluid product-thumbnail">
+                    <div class="col-12 col-md-4 col-lg-3 mb-5 text-center">
+                        <a class="product-item" href="{{route('products.show', $product->name)}}">
+                            <img src="{{$product->imageUrl}}" class="img-fluid product-thumbnail" alt="">
                             <h3 class="product-title">{{$product->name}}</h3>
                             <strong class="product-price">${{$product->price}}</strong>
-
-                            <span class="icon-cross">
-                                    <img src="{{asset("front-assets/images")}}/cross.svg" class="img-fluid">
-                                </span>
                         </a>
+                        @auth
+                        <span class=" bg-black rounded-circle p-2 addToCart"  data-id="{{$product->id}}">
+                                <img src="{{asset('front-assets/images')}}/cross.svg" class="img-fluid" alt="{{$product->name}}">
+                        </span>
+                        @endauth
                     </div>
                 @endforeach
             </div>
@@ -75,7 +77,6 @@
                     <h2 class="section-title">Recent Blog</h2>
                 </div>
                 <div class="col-md-6 text-start text-md-end">
-                    {{--TODO:: Add Link To All Blogs--}}
                     <a href="{{route('blogs.index')}}" class="more">View All Posts</a>
                 </div>
             </div>
