@@ -82,16 +82,15 @@
 
             <div class="row">
                 @foreach($recentBlogs as $blog)
-                        {{--TODO:: Add Links To Blog--}}
                     <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
                         <div class="post-entry">
-                            <a href="#" class="post-thumbnail"><img src="{{$blog->imageUrl}}"
+                            <a href="{{route('blogs.show',$blog->slug)}}" class="post-thumbnail"><img src="{{$blog->imageUrl}}"
                                                                     alt="Image" class="img-fluid"></a>
                             <div class="post-content-entry">
-                                <h3><a href="#">{{$blog->title}}</a></h3>
+                                <h3><a href="{{route('blogs.show',$blog->slug)}}">{{$blog->title}}</a></h3>
                                 <div class="meta">
-                                    <span>by <a href="#">{{$blog->author->name}}</a></span> <span>on <a
-                                            href="#">{{$blog->createdDiffForHumans}}</a></span>
+                                    <span>by <a >{{$blog->author->name}}</a></span> <span>on <a
+                                            >{{$blog->createdDiffForHumans}}</a></span>
                                 </div>
                             </div>
                         </div>
