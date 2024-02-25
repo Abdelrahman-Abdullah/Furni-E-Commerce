@@ -52,7 +52,7 @@
                             <div class="pt-3">
                                 <h3>{{$product->name}}</h3>
                                 <p>{{$product->description}}</p>
-                                <p><a href="#">Read More</a></p>
+                                <p><a href="{{route('products.show', $product->name)}}">Read More</a></p>
                             </div>
                         </div>
                     </div>
