@@ -9,7 +9,7 @@ The website is built using Laravel and Bootstrap.
 ## Features
 - View products
 - Add products to cart
-- Checkout using Stripe
+- Checkout using Paymob
 - View product details
 - Authentication
 - Some Api's
