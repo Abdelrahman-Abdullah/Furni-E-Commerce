@@ -14,15 +14,16 @@
                 @forelse($products as $product)
                     <!-- Start Column 1 -->
                     <div class="col-12 col-md-4 col-lg-3 mb-5 text-center">
-{{--                        TODO: Add href to the product page--}}
                         <a class="product-item" href="{{route('products.show', $product->name)}}">
                             <img src="{{$product->imageUrl}}" class="img-fluid product-thumbnail" alt="">
                             <h3 class="product-title">{{$product->name}}</h3>
                             <strong class="product-price">${{$product->price}}</strong>
                         </a>
+                        @auth
                         <span class=" bg-black rounded-circle p-2 addToCart"  data-id="{{$product->id}}">
                                 <img src="{{asset('front-assets/images')}}/cross.svg" class="img-fluid" alt="{{$product->name}}">
                         </span>
+                        @endauth
                     </div>
                 @empty
                     <div class="col-12">

@@ -45,35 +45,35 @@
                 <div class="row links-wrap">
                     <div class="col-6 col-sm-6 col-md-3">
                         <ul class="list-unstyled">
-                            <li><a href="#">About us</a></li>
-                            <li><a href="#">Services</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Contact us</a></li>
+                            <li><a href="{{route('about')}}">About us</a></li>
+                            <li><a href="{{route('services')}}">Services</a></li>
+                            <li><a href="{{route('blogs.index')}}">Blog</a></li>
+                            <li><a href="{{route('contact.create')}}">Contact us</a></li>
                         </ul>
                     </div>
 
                     <div class="col-6 col-sm-6 col-md-3">
                         <ul class="list-unstyled">
-                            <li><a href="#">Support</a></li>
-                            <li><a href="#">Knowledge base</a></li>
-                            <li><a href="#">Live chat</a></li>
+                            <li><a href="{{route('about')}}">Support</a></li>
+                            <li><a >Knowledge base</a></li>
+                            <li><a >Live chat</a></li>
                         </ul>
                     </div>
 
                     <div class="col-6 col-sm-6 col-md-3">
                         <ul class="list-unstyled">
-                            <li><a href="#">Jobs</a></li>
-                            <li><a href="#">Our team</a></li>
-                            <li><a href="#">Leadership</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a >Jobs</a></li>
+                            <li><a href="{{route('about')}}">Our team</a></li>
+                            <li><a href="{{route('about')}}">Leadership</a></li>
+                            <li><a >Privacy Policy</a></li>
                         </ul>
                     </div>
 
                     <div class="col-6 col-sm-6 col-md-3">
                         <ul class="list-unstyled">
-                            <li><a href="#">Nordic Chair</a></li>
-                            <li><a href="#">Kruzo Aero</a></li>
-                            <li><a href="#">Ergonomic Chair</a></li>
+                            <li><a >Nordic Chair</a></li>
+                            <li><a >Kruzo Aero</a></li>
+                            <li><a >Ergonomic Chair</a></li>
                         </ul>
                     </div>
                 </div>
@@ -90,8 +90,8 @@
 
                 <div class="col-lg-6 text-center text-lg-end">
                     <ul class="list-unstyled d-inline-flex ms-auto">
-                        <li class="me-4"><a href="#">Terms &amp; Conditions</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li class="me-4"><aTerms &amp; Conditions</a></li>
+                        <li><a >Privacy Policy</a></li>
                     </ul>
                 </div>
 

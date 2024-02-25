@@ -1,5 +1,7 @@
 @extends('front.layouts.front-layout', ['title' => "Modern Interior Design Studio"])
 @section('content')
+    @vite('resources/js/cart')
+
     <!-- Start Product Section -->
     <div class="product-section">
         <div class="container">
@@ -13,16 +15,11 @@
                     </div>
                     <!-- End Column 1 -->
                 @foreach($recentProducts as $product)
-                    <div class="col-12 col-md-4 col-lg-3 mb-5 mb-md-0">
-                        {{--    TODO:: Add Link To Cart--}}
-                        <a class="product-item" href="cart.html">
-                            <img src="{{$product->imageUrl}}" class="img-fluid product-thumbnail">
+                    <div class="col-12 col-md-4 col-lg-3 mb-5 text-center">
+                        <a class="product-item" href="{{route('products.show', $product->name)}}">
+                            <img src="{{$product->imageUrl}}" class="img-fluid product-thumbnail" alt="">
                             <h3 class="product-title">{{$product->name}}</h3>
                             <strong class="product-price">${{$product->price}}</strong>
-
-                            <span class="icon-cross">
-                                    <img src="{{asset("front-assets/images")}}/cross.svg" class="img-fluid">
-                                </span>
                         </a>
                     </div>
                 @endforeach
@@ -52,7 +49,7 @@
                             <div class="pt-3">
                                 <h3>{{$product->name}}</h3>
                                 <p>{{$product->description}}</p>
-                                <p><a href="#">Read More</a></p>
+                                <p><a href="{{route('products.show', $product->name)}}">Read More</a></p>
                             </div>
                         </div>
                     </div>
@@ -64,7 +61,6 @@
     <!-- End Popular Product -->
 
     <!-- Start Testimonial Slider -->
-    {{--TODO:: Testimonial Slider--}}
     @include('front.partials.testimonial')
     <!-- End Testimonial Slider -->
 
@@ -76,23 +72,21 @@
                     <h2 class="section-title">Recent Blog</h2>
                 </div>
                 <div class="col-md-6 text-start text-md-end">
-                    {{--TODO:: Add Link To All Blogs--}}
-                    <a href="#" class="more">View All Posts</a>
+                    <a href="{{route('blogs.index')}}" class="more">View All Posts</a>
                 </div>
             </div>
 
             <div class="row">
                 @foreach($recentBlogs as $blog)
-                        {{--TODO:: Add Links To Blog--}}
                     <div class="col-12 col-sm-6 col-md-4 mb-4 mb-md-0">
                         <div class="post-entry">
-                            <a href="#" class="post-thumbnail"><img src="{{$blog->imageUrl}}"
+                            <a href="{{route('blogs.show',$blog->slug)}}" class="post-thumbnail"><img src="{{$blog->imageUrl}}"
                                                                     alt="Image" class="img-fluid"></a>
                             <div class="post-content-entry">
-                                <h3><a href="#">{{$blog->title}}</a></h3>
+                                <h3><a href="{{route('blogs.show',$blog->slug)}}">{{$blog->title}}</a></h3>
                                 <div class="meta">
-                                    <span>by <a href="#">{{$blog->author->name}}</a></span> <span>on <a
-                                            href="#">{{$blog->createdDiffForHumans}}</a></span>
+                                    <span>by <a >{{$blog->author->name}}</a></span> <span>on <a
+                                            >{{$blog->createdDiffForHumans}}</a></span>
                                 </div>
                             </div>
                         </div>
