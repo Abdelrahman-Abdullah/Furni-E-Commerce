@@ -64,7 +64,6 @@
     <!-- End Popular Product -->
 
     <!-- Start Testimonial Slider -->
-    {{--TODO:: Testimonial Slider--}}
     @include('front.partials.testimonial')
     <!-- End Testimonial Slider -->
 
@@ -77,7 +76,7 @@
                 </div>
                 <div class="col-md-6 text-start text-md-end">
                     {{--TODO:: Add Link To All Blogs--}}
-                    <a href="#" class="more">View All Posts</a>
+                    <a href="{{route('blogs.index')}}" class="more">View All Posts</a>
                 </div>
             </div>
 
